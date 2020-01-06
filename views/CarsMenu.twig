@@ -1,0 +1,72 @@
+{% block carsMenu %}
+<head>
+<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&#038;subset=latin-ext' type='text/css' media='all' />
+<link href="../css/main.css" type="text/css" rel="stylesheet" />
+ <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</head>
+
+
+<main region="main" class="main site-content">
+ 
+      <section class="statement">
+        <header>
+          <h2>Renting Done Right. </br> Finally.</h2>
+        </header>
+     
+      </section>
+    <nav region="navigation">
+
+              <tr><td colspan="3">
+          <form action="/customersMenu" method="post">
+            <input class="btn nav-btn" type="submit" value="Customers">
+          </form> 
+          </td>
+            <td colspan="3">
+          <form action="/carsMenu" method="post">
+            <input class="btn nav-btn" type="submit" value="Cars">
+          </form>  
+          </td>
+            <td colspan="3">
+          <form action="/addCustomer" method="post">
+            <input class="btn nav-btn" type="submit" value="Check Out Car">
+          </form>  
+          </td>
+            <td colspan="3">
+          <form action="/addCustomer" method="post">
+            <input class="btn nav-btn" type="submit" value="Check In Car">
+          </form>  
+          </td>
+           <td colspan="3">
+          <form action="/history" method="post">
+            <input class="btn nav-btn" type="submit" value="History">
+          </form>  
+          </td></tr>
+
+    </nav>
+        </main>
+       
+    
+  <table border>
+  
+  {% for car in cars %}
+        <tr>
+          <td><b>{{car.licensePlate}}</b></td>
+              <td colspan = "2"><b>{{car.licensePlate}}</b></td>
+              <td colspan = "2"><b>{{car.brand}}</b></td>
+              <td colspan = "2"><b>{{car.colour}}</b></td>
+              <td colspan = "2"><b>{{car.year}}</b></td>
+              <td colspan = "2"><b>{{car.price}}</b></td>
+              <td colspan = "2"><b>{{car.start}}</b></td>
+              <td colspan = "2"><b>{{car.end}}</b></td>
+  
+
+      {% endfor %}
+    </table>
+    
+
+
+
+{% endblock %}
+

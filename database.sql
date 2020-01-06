@@ -1,32 +1,30 @@
-DROP DATABASE if exists car_rental;
-CREATE DATABASE car_rental;
-USE car_rental;
+DROP DATABASE if exists Carrental;
+CREATE DATABASE Carrental;
+USE Carrental;
 
-CREATE TABLE customers (
-	social_security_number CHAR(10) NOT NULL PRIMARY KEY,
-	name VARCHAR(100) NOT NULL,
-	address VARCHAR(256) NOT NULL,
-	postal_address VARCHAR(100) NOT NULL,
-	phone_number VARCHAR(13) NOT NULL,
-	PRIMARY KEY (social_security_number)
+CREATE TABLE Customers (
+	customerNumber CHAR(10) NOT NULL,
+	customerName VARCHAR(100) NOT NULL,
+	customerAddress VARCHAR(256) NOT NULL,
+	postalAddress VARCHAR(100) NOT NULL,
+	phoneNumber VARCHAR(13) NOT NULL,
+	PRIMARY KEY (customerNumber)
 );
 
-CREATE TABLE cars (
-	registration_plate VARCHAR(6) NOT NULL PRIMARY KEY,
-	brand VARCHAR(10) NOT NULL,
-	colour VARCHAR(7) NOT NULL,
-	year VARCHAR(4) NOT NULL,
-	price FLOAT NOT NULL,
-	PRIMARY KEY (registration_plate),
-    FOREIGN KEY colour REFERENCES colours(colour),
-    FOREIGN KEY brand REFERENCES brands(brand)
+INSERT INTO `Customers` (`customerNumber`, `customerName`, `customerAddress`, `postalAddress`, `phoneNumber`) VALUES
+(8308184160,	'Jack Sparrow',	'Skeppargatan 54 A',	'11458 Stockholm',	'0733310104'),
+(1507303731,	'Mr Darcy',	'Ordenstrappan 1',	'11430 Stockholm',	'0707778800'),
+(4604279796,	'Hannibal Lecter',	'Grindsgatan 35',	'11857 Stockholm',	'0733464649'),
+(8807280030,	'Tyler Durdan',	'Hornsgatan 4',	'11820 Stockholm',	'0707888470');
+
+
+
+CREATE TABLE Brands (
+    brand VARCHAR(10),
+    PRIMARY KEY (brand)
 );
 
-CREATE TABLE brands (
-    brand VARCHAR(10)
-);
-
-INSERT INTO brands(brand) VALUES
+INSERT INTO Brands(brand) VALUES
     ('Peugeot'),
     ('Suzuki'),
     ('Fiat'),
@@ -39,11 +37,12 @@ INSERT INTO brands(brand) VALUES
     ('Chrystler')
 ;
 
-CREATE TABLE colours (
-    colour VARCHAR(10)
+CREATE TABLE Colours (
+    colour VARCHAR(10),
+    PRIMARY KEY (colour)
 );
 
-INSERT INTO colours(colour) VALUES
+INSERT INTO Colours(colour) VALUES
 	('Blue'),
 	('Red'),
 	('Green'),
@@ -57,7 +56,20 @@ INSERT INTO colours(colour) VALUES
 
 
 
-INSERT INTO cars(registration_plate) VALUES
+CREATE TABLE Cars (
+	licensePlate VARCHAR(6) NOT NULL,
+	brand VARCHAR(10) NOT NULL,
+	colour VARCHAR(7) NOT NULL,
+	year VARCHAR(4) NOT NULL,
+	price FLOAT NOT NULL,
+	PRIMARY KEY (licensePlate),
+    start DATETIME NOT NULL,
+    end DATETIME DEFAULT NOT NULL,
+    FOREIGN KEY (colour) REFERENCES Colours(colour)),
+    FOREIGN KEY (brand) REFERENCES Brands(brand))
+);
+
+INSERT INTO Cars(licensePlate) VALUES
     ('ABC123'),
     ('BCD234'),
     ('CDE345'),
@@ -70,16 +82,25 @@ INSERT INTO cars(registration_plate) VALUES
     ('KLM012');
 
 
-CREATE TABLE booking (
-    social_security_number CHAR(10) NOT NULL,
-    registration_plate CHAR(6),
-    checked_out_by CHAR(10) NOT NULL,
-    checked_in_time DATETIME NOT NULL,
-    checked_out_time DATETIME DEFAULT NOT NULL,
-    FOREIGN KEY social_security_number REFERENCES customers(social_security_number),
-    FOREIGN KEY registration_plate REFERENCES cars(registration_plate)
+CREATE TABLE RentedCars (
+    customerNumber CHAR(10) NOT NULL,
+    licensePlate CHAR(6),
+    start DATETIME NOT NULL,
+    end DATETIME DEFAULT NOT NULL,
+    FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber)),
+    FOREIGN KEY (licensePlate) REFERENCES Cars (licensePlate))
 
 );
+
+
+
+
+
+SELECT * FROM colours;
+
+
+/*datum när bilen lånades ut (start) - start DATETIME NOT NOLL
+//datum när bilen lämnades tillbaka (end) - end DATETIME DEFAULT NULL
 /* then column days = echo(checked_out_time - checked_in_time)
 if (!isset(days < 1)) {
     disable delete & edit button 
@@ -87,9 +108,3 @@ if (!isset(days < 1)) {
     enable delete  edit buutton
 }
 This should be created with JS*/
-
-SELECT * FROM colours;
-
-
-//datum när boken lånades ut (start) - start DATETIME NOT NOLL
-//datum när boken lämnades tillbaka (end) - end DATETIME DEFAULT NULL

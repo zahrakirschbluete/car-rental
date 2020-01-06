@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Bookstore - Login</title>
+</head>
+<body>
+ <p>Enter your details to login:</p>
+ <form action="" method="post">
+ <label>Username</label>
+ <input type="text" name="username" />
+ <label>Password</label>
+ <input type="password" name="password" />
+ <input type="submit" value="Login"/>
+ </form>
+
+ <p>Form submitted? <?php echo (int) $submitted; ?></p>
+ <p>Your login info is</p>
+Understanding PHP Basics
+[ 52 ]
+ <ul>
+ <li><b>username</b>: <?php echo $_POST['username']; ?></li>
+ <li><b>password</b>: <?php echo $_POST['password']; ?></li>
+ </ul>
+</body>
+</html>
