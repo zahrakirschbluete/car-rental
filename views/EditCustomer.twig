@@ -1,0 +1,18 @@
+{% block editCustomer %}
+  <h1>Edit Customer</h1>
+
+  <form method="post" action="/customerEdited/{{customerNumber}}/{{customerName}}/{{customerAddress}}/{{postalAddress}}/{{phoneNumber}}">
+    Name: <input type="text" name="customerName"
+           value="{{customerName}}" autofocus="autofocus">
+
+    Address: <input type="text" name="customerAddress"
+           value="{{customerAddress}}" autofocus="autofocus">
+
+    Postal Address: <input type="text" name="postalAddress"
+           value="{{postalAddress}}" autofocus="autofocus">
+
+    Phone Number: <input type="text" name="phoneNumber"
+           value="{{phoneNumber}}" autofocus="autofocus">
+    <input type="submit" value="Ok">
+  </form>
+{% endblock %}

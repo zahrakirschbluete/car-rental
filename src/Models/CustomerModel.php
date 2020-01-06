@@ -24,34 +24,35 @@ class CustomerModel extends AbstractModel {
   }
 
 
-  public function editCustomer($newCustomerName, $newCustomerAddress, $newPostalAddress, $newPhoneNumber) {
+  public function editCustomer($customerNumber, $newCustomerName, $newCustomerAddress, $newPostalAddress, $newPhoneNumber) {
     $customersQuery = "UPDATE Customers SET customerName = :customerName, customerAddress = :customerAddress, postalAddress = :postalAddress, phoneNumber = :phoneNumber " .
                       "WHERE customerNumber = :customerNumber";
     $customersStatement = $this->db->prepare($customersQuery);
-    $customersParameters = ["customerName" => $newCustomerName,
+    $customersParameters = ["customerNumber" => $customerNumber,
+                            "customerName" => $newCustomerName,
                             "customerAddress" => $newCustomerAddress,
                           "postalAddress" => $newPostalAddress,
-                        "newPhoneNumber" => $newPhoneNumber];
+                        "phoneNumber" => $newPhoneNumber];
     $customersResult = $customersStatement->execute($customersParameters);
     if (!$customersResult) die($this->db->errorInfo()[2]);
   }
 
   public function removeCustomer($customerNumber) {
-    $accountsQuery = "SELECT COUNT(*) FROM Accounts WHERE customerNumber = :customerNumber";
-    $accountsStatement = $this->db->prepare($accountsQuery);
-    $accountsResult = $accountsStatement->execute(["customerNumber" => $customerNumber]);
-    if (!$accountsResult) die($this->db->errorInfo()[2]);
-    $accountsRows = $accountsStatement->fetchAll();
-    $numberOfAccounts = htmlspecialchars($accountsRows[0]["COUNT(*)"]);
+    // $accountsQuery = "SELECT COUNT(*) FROM Accounts WHERE customerNumber = :customerNumber";
+    // $accountsStatement = $this->db->prepare($accountsQuery);
+    // $accountsResult = $accountsStatement->execute(["customerNumber" => $customerNumber]);
+    // if (!$accountsResult) die($this->db->errorInfo()[2]);
+    // $accountsRows = $accountsStatement->fetchAll();
+    // $numberOfAccounts = htmlspecialchars($accountsRows[0]["COUNT(*)"]);
     
-    if ($numberOfAccounts == 0) {
+    // if ($numberOfAccounts == 0) {
       $customersQuery = "DELETE FROM Customers WHERE customerNumber = :customerNumber";
       $customersStatement = $this->db->prepare($customersQuery);
       $customersResult = $customersStatement->execute(["customerNumber" => $customerNumber]);
       if (!$customersResult) die($this->db->errorInfo()[2]);
-    }
+    // }
 
-    return $numberOfAccounts;
+    // return $numberOfAccounts;
   }  
 
   public function addAccount($customerNumber) {
