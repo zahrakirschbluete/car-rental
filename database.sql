@@ -93,18 +93,3 @@ CREATE TABLE RentedCars (
 );
 
 
-
-
-
-SELECT * FROM colours;
-
-
-/*datum när bilen lånades ut (start) - start DATETIME NOT NOLL
-//datum när bilen lämnades tillbaka (end) - end DATETIME DEFAULT NULL
-/* then column days = echo(checked_out_time - checked_in_time)
-if (!isset(days < 1)) {
-    disable delete & edit button 
-} else {
-    enable delete  edit buutton
-}
-This should be created with JS*/
