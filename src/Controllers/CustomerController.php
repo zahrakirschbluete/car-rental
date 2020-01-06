@@ -32,10 +32,10 @@ class CustomerController extends AbstractController {
     return $this->render("CustomerAdded.twig", $properties);
   }    
 
-  public function editCustomer($customerName, $customerAddress, $postalAddress, $phoneNumber) {
+  public function editCustomer($customerNumber, $customerName, $customerAddress, $postalAddress, $phoneNumber) {
     //$customerName = $map["customerName"];
     //$customerNumber = $map["customerNumber"];      
-    $properties = [
+    $properties = ["customerNumber" => $customerNumber,
     "customerName" => $customerName,
    "customerAddress" => $customerAddress,
  "postalAddress" => $postalAddress,
@@ -43,15 +43,15 @@ class CustomerController extends AbstractController {
     return $this->render("EditCustomer.twig", $properties);
   }
     
-  public function customerEdited($oldCustomerName, $oldCustomerAddress, $oldPostalAddress, $oldPhoneNumber) {
+  public function customerEdited($customerNumber, $oldCustomerName, $oldCustomerAddress, $oldPostalAddress, $oldPhoneNumber) {
     $form = $this->request->getForm();
     $newCustomerName = $form["customerName"];
     $newCustomerAddress = $form["customerAddress"];
     $newPostalAddress = $form["postalAddress"];
     $newPhoneNumber = $form["phoneNumber"];
     $customerModel = new CustomerModel($this->db);
-    $customerModel->editCustomer($newCustomerName, $newCustomerAddress, $newPostalAddress, $newPhoneNumber);
-    $properties = [
+    $customerModel->editCustomer($customerNumber, $newCustomerName, $newCustomerAddress, $newPostalAddress, $newPhoneNumber);
+    $properties = ["customerNumber" => $customerNumber,
                    "oldCustomerName" => $oldCustomerName,
                    "newCustomerName" => $newCustomerName,
                   "oldCustomerAddress" => $oldCustomerAddress,

@@ -11,20 +11,26 @@
     "controller": "Customer",
     "method": "customerAdded"
   },
-  "editCustomer/:customerNumber/:customerName": {
+  "editCustomer/:customerNumber/:customerName/:customerAddress/:postalAddress/:phoneNumber": {
     "controller": "Customer",
     "method": "editCustomer",
     "params": {
       "customerNumber": "number",
-      "customerName": "string"
+      "customerName": "string",
+      "customerAddress": "string",
+      "postalAddress": "string",
+      "phoneNumber": "number"
     }
   },
-  "customerEdited/:customerNumber/:customerName": {
+  "customerEdited/:customerNumber/:customerName/:customerAddress/:postalAddress/:phoneNumber": {
     "controller": "Customer",
     "method": "customerEdited",
     "params": {
       "customerNumber": "number",
-      "customerName": "string"
+      "customerName": "string",
+      "customerAddress": "string",
+      "postalAddress": "string",
+      "phoneNumber": "number"
     }
   },
   "removeCustomer/:customerNumber/:customerName": {

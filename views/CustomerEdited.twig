@@ -1,0 +1,10 @@
+{% block customerEdited %}
+  <h1>Customer Edited</h1>
+
+  <p>The information regarding the customer with the social security number {{customerNumber}}
+     has been successfully updated.</p>
+
+  <form method="post" action="/customersMenu">
+    <input type="submit" value="Ok">
+  </form>
+{% endblock %}

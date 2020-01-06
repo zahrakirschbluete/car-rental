@@ -68,7 +68,7 @@ CREATE TABLE Cars (
     FOREIGN KEY (colour) REFERENCES Colours(colour),
     FOREIGN KEY (brand) REFERENCES Brands(brand),
     FOREIGN KEY (start) REFERENCES Booking(start),
-    FOREIGN KEY (end) REFERENCES Brands(end)
+    FOREIGN KEY (end) REFERENCES Booking(end)
 );
 
 INSERT INTO Cars(licensePlate) VALUES
