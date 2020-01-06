@@ -65,8 +65,10 @@ CREATE TABLE Cars (
 	PRIMARY KEY (licensePlate),
     start DATETIME NOT NULL,
     end DATETIME DEFAULT NOT NULL,
-    FOREIGN KEY (colour) REFERENCES Colours(colour)),
-    FOREIGN KEY (brand) REFERENCES Brands(brand))
+    FOREIGN KEY (colour) REFERENCES Colours(colour),
+    FOREIGN KEY (brand) REFERENCES Brands(brand),
+    FOREIGN KEY (start) REFERENCES Booking(start),
+    FOREIGN KEY (end) REFERENCES Brands(end)
 );
 
 INSERT INTO Cars(licensePlate) VALUES
@@ -82,13 +84,13 @@ INSERT INTO Cars(licensePlate) VALUES
     ('KLM012');
 
 
-CREATE TABLE RentedCars (
+CREATE TABLE Booking (
     customerNumber CHAR(10) NOT NULL,
     licensePlate CHAR(6),
     start DATETIME NOT NULL,
     end DATETIME DEFAULT NOT NULL,
-    FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber)),
-    FOREIGN KEY (licensePlate) REFERENCES Cars (licensePlate))
+    FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber),
+    FOREIGN KEY (licensePlate) REFERENCES Cars (licensePlate)
 
 );
 
