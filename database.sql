@@ -20,7 +20,8 @@ INSERT INTO `Customers` (`customerNumber`, `customerName`, `customerAddress`, `p
 
 
 CREATE TABLE Brands (
-    brand VARCHAR(10)
+    brand VARCHAR(10),
+    PRIMARY KEY (brand)
 );
 
 INSERT INTO Brands(brand) VALUES
@@ -37,7 +38,8 @@ INSERT INTO Brands(brand) VALUES
 ;
 
 CREATE TABLE Colours (
-    colour VARCHAR(10)
+    colour VARCHAR(10),
+    PRIMARY KEY (colour)
 );
 
 INSERT INTO Colours(colour) VALUES
@@ -61,6 +63,8 @@ CREATE TABLE Cars (
 	year VARCHAR(4) NOT NULL,
 	price FLOAT NOT NULL,
 	PRIMARY KEY (licensePlate),
+    start DATETIME NOT NULL,
+    end DATETIME DEFAULT NOT NULL,
     FOREIGN KEY (colour) REFERENCES Colours(colour)),
     FOREIGN KEY (brand) REFERENCES Brands(brand))
 );
@@ -89,18 +93,3 @@ CREATE TABLE RentedCars (
 );
 
 
-
-
-
-SELECT * FROM colours;
-
-
-/*datum när bilen lånades ut (start) - start DATETIME NOT NOLL
-//datum när bilen lämnades tillbaka (end) - end DATETIME DEFAULT NULL
-/* then column days = echo(checked_out_time - checked_in_time)
-if (!isset(days < 1)) {
-    disable delete & edit button 
-} else {
-    enable delete  edit buutton
-}
-This should be created with JS*/
