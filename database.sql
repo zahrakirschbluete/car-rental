@@ -59,36 +59,35 @@ INSERT INTO Colours(colour) VALUES
 CREATE TABLE Cars (
 	licensePlate VARCHAR(6) NOT NULL,
 	brand VARCHAR(10) NOT NULL,
-	colour VARCHAR(7) NOT NULL,
+	colour VARCHAR(10) NOT NULL,
 	year VARCHAR(4) NOT NULL,
 	price FLOAT NOT NULL,
-	PRIMARY KEY (licensePlate),
-    start DATETIME NOT NULL,
-    end DATETIME DEFAULT NOT NULL,
+    customerNumber CHAR(10) NOT NULL,
+    PRIMARY KEY (licensePlate),
+    start DATETIME,
     FOREIGN KEY (colour) REFERENCES Colours(colour),
     FOREIGN KEY (brand) REFERENCES Brands(brand),
-    FOREIGN KEY (start) REFERENCES Booking(start),
-    FOREIGN KEY (end) REFERENCES Booking(end)
+    FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber)
 );
 
-INSERT INTO Cars(licensePlate) VALUES
-    ('ABC123'),
-    ('BCD234'),
-    ('CDE345'),
-    ('EFG456'),
-    ('FGH567'),
-    ('GHI678'),
-    ('HIJ789'),
-    ('IJK890'),
-    ('JKL901'),
-    ('KLM012');
+INSERT INTO Cars(licensePlate, brand) VALUES
+    ('ABC123', 'Fiat'),
+    ('BCD234', 'Suzuki'),
+    ('CDE345', 'Peugeot'),
+    ('EFG456', 'Honda'),
+    ('FGH567', 'Ford'),
+    ('GHI678', 'Hyundai'),
+    ('HIJ789', 'Volkswagen'),
+    ('IJK890', 'Toyota'),
+    ('JKL901', 'Renault'),
+    ('KLM012', 'Chrystler');
 
 
-CREATE TABLE Booking (
+CREATE TABLE History (
     customerNumber CHAR(10) NOT NULL,
     licensePlate CHAR(6),
     start DATETIME NOT NULL,
-    end DATETIME DEFAULT NOT NULL,
+    end TIMESTAMP NULL,
     FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber),
     FOREIGN KEY (licensePlate) REFERENCES Cars (licensePlate)
 

@@ -30,12 +30,12 @@
           </td>
             <td colspan="3">
           <form action="/addCustomer" method="post">
-            <input class="btn nav-btn" type="submit" value="Check Out Car">
+            <input class="btn nav-btn" type="submit" value="Rent Car">
           </form>  
           </td>
             <td colspan="3">
           <form action="/addCustomer" method="post">
-            <input class="btn nav-btn" type="submit" value="Check In Car">
+            <input class="btn nav-btn" type="submit" value="Return Car">
           </form>  
           </td>
            <td colspan="3">
@@ -52,14 +52,12 @@
   
   {% for car in cars %}
         <tr>
-          <td><b>{{car.licensePlate}}</b></td>
               <td colspan = "2"><b>{{car.licensePlate}}</b></td>
               <td colspan = "2"><b>{{car.brand}}</b></td>
               <td colspan = "2"><b>{{car.colour}}</b></td>
               <td colspan = "2"><b>{{car.year}}</b></td>
               <td colspan = "2"><b>{{car.price}}</b></td>
               <td colspan = "2"><b>{{car.start}}</b></td>
-              <td colspan = "2"><b>{{car.end}}</b></td>
   
 
       {% endfor %}
@@ -70,3 +68,10 @@
 
 {% endblock %}
 
+
+ <tr><td colspan="3">
+          <form action="/addCar" method="post">
+            <input class="btn nav-btn" style="width: 100%;" type="submit" value="Add car">
+          </form>  
+          </td>
+          </tr>

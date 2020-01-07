@@ -3,6 +3,10 @@
     "controller": "Customer",
     "method": "addCustomer"
   },
+  "addCar": {
+    "controller": "Car",
+    "method": "addCar"
+  },
     "customersMenu": {
       "controller": "CustomersMenu",
       "method": "customerList"
