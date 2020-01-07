@@ -9,21 +9,24 @@ use PDO;
 class CarsMenuModel extends AbstractModel {
   public function carList() {
     $carRows = $this->db->query("SELECT * FROM Cars");
+    $brandRows = $this->db->query("SELECT * FROM Brands");
     if (!$carRows) die($this->db->errorInfo());
+    if (!$brandRows) die($this->db->errorInfo());
       
     $cars = [];
     foreach ($carRows as $carRow) {
       $licensePlate = htmlspecialchars($carRow["licensePlate"]);
       $brand = htmlspecialchars($carRow["brand"]);
       $colour = htmlspecialchars($carRow["colour"]);
+      $year = htmlspecialchars($carRow["year"]);
       $price = htmlspecialchars($carRow["price"]);
       $start = htmlspecialchars($carRow["start"]);
-      $end = htmlspecialchars($carRow["end"]);
-      $car = ["brand" => $brand,
+      $car = ["licensePlate" => $licensePlate,
+                  "brand" => $brand,
                    "colour" => $colour,
+                   "year" => $year,
                   "price" => $price,
-                  "start" => $start,
-                  "end" => $end];      
+                  "start" => $start];      
         
     //   $accountsQuery = "SELECT * FROM Accounts WHERE customerNumber = :customerNumber";
     //   $accountsStatement = $this->db->prepare($accountsQuery);
