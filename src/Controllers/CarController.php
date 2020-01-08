@@ -6,7 +6,10 @@ use Carrental\Models\CarModel;
 
 class CarController extends AbstractController {
   public function addCar() {
-    return $this->render("AddCar.twig", []);
+    $CarModel = new CarModel($this->db);
+    $fetchColours = $CarModel->fetchColours();
+    $fetchBrands = $CarModel->fetchBrands();
+    return $this->render("AddCar.twig", ["colours" => $fetchColours, "brands" => $fetchBrands]);
   }
     
   public function carAdded() {

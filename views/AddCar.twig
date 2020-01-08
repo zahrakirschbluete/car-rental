@@ -13,12 +13,16 @@
       License plate: <input type="text" name="licensePlate" autofocus="autofocus">
 
       Brand: <select>
-   {% for brand in Brands %}
-      <option value={{Brands.brand}}>{{Brands.brand}}</option>
+   {% for brand in brands %}
+      <option value={{brand}}>{{brand}}</option>
       {% endfor %}
       </select>
       
-      Colour: <input type="text" name="colour" autofocus="autofocus">
+      Colour: <select>
+   {% for colour in colours %}
+      <option value={{colour}}>{{colour}}</option>
+      {% endfor %}
+      </select>
 
     Year: <input type="text" name="year" autofocus="autofocus">
 
