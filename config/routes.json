@@ -46,7 +46,6 @@
     "controller": "Car",
     "method": "addCar"
   },
-
   "carAdded": {
     "controller": "Car",
     "method": "carAdded"
