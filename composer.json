@@ -1,16 +1,8 @@
-{
-    "name": "picahielos/bookstore",
-    "description": "Manages an online bookstore.",
-    "minimum-stability": "stable",
-    "license": "Apache-2.0",
-    "type": "project",
-    "authors": [
-        {
-            "name": "Antonio Lopez",
-            "email": "antonio.lopez.zapata@gmail.com"
-        }
-    ],
-    "require": {
+"minimum-stability": "stable",
+"license": "Apache-2.0",
+"type": "project"
+
+"require": {
         "monolog/monolog": "^1.17",
         "twig/twig": "^1.23"
     },

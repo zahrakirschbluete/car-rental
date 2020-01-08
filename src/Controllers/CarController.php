@@ -19,10 +19,9 @@ class CarController extends AbstractController {
     $colour = $form["colour"];
     $year = $form["year"];
     $price = $form["price"];
-    $start = $form["start"];
     // // $customerName = $form["customerName"];
     $carModel = new CarModel($this->db);
-    $newCar = $carModel->addCar($licensePlate, $brand, $colour, $year, $price, $start);
+    $newCar = $carModel->addCar($licensePlate, $brand, $colour, $year, $price);
     // $customerNumber = $customerModel->addCustomer($customerName);
     // $customerAddress = $customerModel->addCustomer($customerName);
     // $postalAddress = $customerModel->addCustomer($customerName);
@@ -31,8 +30,7 @@ class CarController extends AbstractController {
                    "brand" => $brand,
                   "colour" => $colour,
                 "year" => $year,
-                "price" => $price,
-              "start" => $start];
+                "price" => $price];
     return $this->render("CarAdded.twig", $properties);
   }    
 

@@ -12,13 +12,13 @@
     <form method="post" action="/carAdded">
       License plate: <input type="text" name="licensePlate" autofocus="autofocus">
 
-      Brand: <select>
+      Brand: <select name="brand" autofocus="autofocus">
    {% for brand in brands %}
       <option value={{brand}}>{{brand}}</option>
       {% endfor %}
       </select>
       
-      Colour: <select>
+      Colour: <select name="colour" autofocus="autofocus">
    {% for colour in colours %}
       <option value={{colour}}>{{colour}}</option>
       {% endfor %}

@@ -1,0 +1,9 @@
+{% block carAdded %}
+  <h1>Car Added</h1>
+
+  <p>A {{colour}} {{brand}} from {{year}} with the license plate number {{licensePlate}} has been added.</p>
+
+  <form method="post" action="/carsMenu">
+    <input type="submit" value="Ok">
+  </form>
+{% endblock %}

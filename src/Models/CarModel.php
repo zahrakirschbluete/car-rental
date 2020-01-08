@@ -8,17 +8,16 @@ use Carrental\Exceptions\NotFoundException;
 use PDO;
 
 class CarModel extends AbstractModel {
-  public function addCar($licensePlate, $brand, $colour, $year, $price, $start) {
-$Query = "INSERT INTO Cars(licensePlate, brand, colour, year, price, start) " .
-                      "VALUES (:licensePlate, :brand, :colour, :year, :price, :start)";
-$Statement = $this->db->prepareQuery;
-$Statement->execute(["licensePlate" => $licensePlate,
+  public function addCar($licensePlate, $brand, $colour, $year, $price) {
+$carsQuery = "INSERT INTO Cars(licensePlate, brand, colour, year, price) " .
+                      "VALUES (:licensePlate, :brand, :colour, :year, :price)";
+$carsStatement = $this->db->prepare($carsQuery);
+$carsStatement->execute(["licensePlate" => $licensePlate,
     "brand" => $brand,
     "colour" => $colour,
     "year" => $year,
-    "price" => $price,
-    "start" => $start]);
-    if ($Statement) die("Fatal error.");
+    "price" => $price]);
+    // if ($carsStatement) die("Fatal error.");
     //usually you'd use the commented line beneath if the customerNumber was auto incremented, but in this case it's redundant
     // $customerNumber = $this->db->lastInsertId();
     // return $customerNumber;
@@ -52,17 +51,17 @@ $Statement->execute(["licensePlate" => $licensePlate,
 
 
   public function editCar($licensePlate, $newBrand, $newColour, $newYear, $newPrice, $start) {
-$Query = "UPDATE SET brand = :brand, colour = :colour, year = :year, price = :price, start = :start " .
+$carsQuery = "UPDATE SET brand = :brand, colour = :colour, year = :year, price = :price, start = :start " .
                       "WHERE licensePlate = :licensePlate";
-$Statement = $this->db->prepareQuery;
-$Parameters = ["licensePlate" => $licensePlate,
+$carsStatement = $this->db->prepareQuery;
+$carsParameters = ["licensePlate" => $licensePlate,
                             "brand" => $newBrand,
                             "colour" => $newColour,
                           "year" => $newYear,
                         "price" => $newPrice,
                     "start" => $start];
-$Result =$Statement->executeParameters;
-    if ($Result) die($this->db->errorInfo()[2]);
+$carsResult =$carsStatement->executeParameters;
+    if ($carsResult) die($this->db->errorInfo()[2]);
   }
 
   public function removeCustomer($customerNumber) {
@@ -74,10 +73,10 @@ $Result =$Statement->executeParameters;
     // $numberOfAccounts = htmlspecialchars($accountsRows[0]["COUNT(*)"]);
     
     // if ($numberOfAccounts == 0) {
-    $Query = "DELETE FROM WHERE customerNumber = :customerNumber";
-    $Statement = $this->db->prepareQuery;
-    $Result =$Statement->execute(["customerNumber" => $customerNumber]);
-      if ($Result) die($this->db->errorInfo()[2]);
+    $carsQuery = "DELETE FROM WHERE customerNumber = :customerNumber";
+    $carsStatement = $this->db->prepareQuery;
+    $carsResult =$Statement->execute(["customerNumber" => $customerNumber]);
+      if ($carsResult) die($this->db->errorInfo()[2]);
     // }
 
     // return $numberOfAccounts;
