@@ -10,6 +10,8 @@ class CustomerController extends AbstractController {
     return $this->render("AddCustomer.twig", []);
   }
     
+  //function which picks up information from the form, sends it to the CustomerModel which in turn will store the information in the database.
+  //Once this is done, the function will return this data to the view "CustomerAdded"
   public function customerAdded() {
     $form = $this->request->getForm();
     $customerName = $form["customerName"];
@@ -32,6 +34,7 @@ class CustomerController extends AbstractController {
     return $this->render("CustomerAdded.twig", $properties);
   }    
 
+  //function which enables the user to edit the customer information by returning the existing information to the view EditCustomer
   public function editCustomer($customerNumber, $customerName, $customerAddress, $postalAddress, $phoneNumber) {
     //$customerName = $map["customerName"];
     //$customerNumber = $map["customerNumber"];      
@@ -43,6 +46,7 @@ class CustomerController extends AbstractController {
     return $this->render("EditCustomer.twig", $properties);
   }
     
+  //function which will pick up the updated information from the edit form and tell the CustomerModel to store the datat
   public function customerEdited($customerNumber, $oldCustomerName, $oldCustomerAddress, $oldPostalAddress, $oldPhoneNumber) {
     $form = $this->request->getForm();
     $newCustomerName = $form["customerName"];
@@ -63,6 +67,7 @@ class CustomerController extends AbstractController {
     return $this->render("CustomerEdited.twig", $properties);
   }    
     
+  //function which shares information to the CustomerModel, which will in turn remove the selected customer data from the database
   public function removeCustomer($customerNumber, $customerName) {
     $customerModel = new CustomerModel($this->db);
     $numberOfAccounts = $customerModel->removeCustomer($customerNumber);
@@ -71,6 +76,8 @@ class CustomerController extends AbstractController {
                    "numberOfAccounts" => $numberOfAccounts];
     return $this->render("CustomerRemoved.twig", $properties);
   }
+
+  
 
   public function addAccount($customerNumber, $customerName) {
     $customerModel = new CustomerModel($this->db);

@@ -1,0 +1,10 @@
+{% block carEdited %}
+  <h1>Car Edited</h1>
+
+  <p>The information regarding the car with the license plate number {{licensePlate}}
+     has been successfully updated.</p>
+
+  <form method="post" action="/rentCar">
+    <input type="submit" value="Ok">
+  </form>
+{% endblock %}

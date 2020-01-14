@@ -8,8 +8,9 @@ use PDO;
 
 class CarsMenuModel extends AbstractModel {
   public function carList() {
-    $carRows = $this->db->query("SELECT * FROM Cars");
+    $carRows = $this->db->query("SELECT * FROM Cars join Booking WHERE Cars.licensePlate = Booking.licensePlate");
     $brandRows = $this->db->query("SELECT * FROM Brands");
+    $customerRows = $this->db->query("SELECT * FROM Cars join Customers WHERE Cars.customerNumber = Customers.customerNumber");
     if (!$carRows) die($this->db->errorInfo());
     if (!$brandRows) die($this->db->errorInfo());
       
@@ -20,12 +21,14 @@ class CarsMenuModel extends AbstractModel {
       $colour = htmlspecialchars($carRow["colour"]);
       $year = htmlspecialchars($carRow["year"]);
       $price = htmlspecialchars($carRow["price"]);
+      $customerNumber = htmlspecialchars($carRow["customerNumber"]);
       $start = htmlspecialchars($carRow["start"]);
       $car = ["licensePlate" => $licensePlate,
                   "brand" => $brand,
                    "colour" => $colour,
                    "year" => $year,
                   "price" => $price,
+                  "customerNumber" => $customerNumber,
                   "start" => $start];      
         
     //   $accountsQuery = "SELECT * FROM Accounts WHERE customerNumber = :customerNumber";

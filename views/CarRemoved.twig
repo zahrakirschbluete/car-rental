@@ -1,0 +1,14 @@
+{% block carRemoved %}
+  <h1>Customer Removed</h1>
+
+
+    <p>The car with license plate number {{licensePlate}} has been removed.</p>
+
+    <p><i>The car with the license plate number {{licensePlate}}
+       cannot be removed since they are currently being rented.</i></p>
+
+  
+  <form method="post" action="/carsMenu">
+    <input type="submit" value="Ok">
+  </form>
+{% endblock %}

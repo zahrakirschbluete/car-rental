@@ -19,13 +19,8 @@ class CarController extends AbstractController {
     $colour = $form["colour"];
     $year = $form["year"];
     $price = $form["price"];
-    // // $customerName = $form["customerName"];
     $carModel = new CarModel($this->db);
     $newCar = $carModel->addCar($licensePlate, $brand, $colour, $year, $price);
-    // $customerNumber = $customerModel->addCustomer($customerName);
-    // $customerAddress = $customerModel->addCustomer($customerName);
-    // $postalAddress = $customerModel->addCustomer($customerName);
-    // $phoneNumber = $customerModel->addCustomer($customerName);
     $properties = ["licensePlate" => $licensePlate,
                    "brand" => $brand,
                   "colour" => $colour,
@@ -34,52 +29,79 @@ class CarController extends AbstractController {
     return $this->render("CarAdded.twig", $properties);
   }    
 
-  public function editCar($customerNumber, $customerName, $customerAddress, $postalAddress, $phoneNumber) {
+  public function editCar($licensePlate, $brand, $colour, $year, $price) {
     //$customerName = $map["customerName"];
-    //$customerNumber = $map["customerNumber"];      
-    $properties = ["customerNumber" => $customerNumber,
-    "customerName" => $customerName,
-   "customerAddress" => $customerAddress,
- "postalAddress" => $postalAddress,
-"phoneNumber" => $phoneNumber];  
+    //$customerNumber = $map["customerNumber"]; 
+    $CarModel = new CarModel($this->db);     
+    $fetchColours = $CarModel->fetchColours();
+    $fetchBrands = $CarModel->fetchBrands();
+    $properties = ["licensePlate" => $licensePlate,
+    "oldBrand" => $brand,
+   "oldColour" => $colour,
+ "oldYear" => $year,
+"oldPrice" => $price,
+"colours" => $fetchColours,
+"brands" => $fetchBrands];  
     return $this->render("EditCar.twig", $properties);
   }
     
-  public function carEdited($customerNumber, $oldCustomerName, $oldCustomerAddress, $oldPostalAddress, $oldPhoneNumber) {
+  public function carEdited($licensePlate, $oldBrand, $oldColour, $oldYear, $oldPrice) {
     $form = $this->request->getForm();
-    $newCustomerName = $form["customerName"];
-    $newCustomerAddress = $form["customerAddress"];
-    $newPostalAddress = $form["postalAddress"];
-    $newPhoneNumber = $form["phoneNumber"];
+    $newBrand = $form["brand"];
+    $newColour = $form["colour"];
+    $newYear = $form["year"];
+    $newPrice = $form["price"];
     $carModel = new CarModel($this->db);
-    $carModel->editCar($customerNumber, $newCustomerName, $newCustomerAddress, $newPostalAddress, $newPhoneNumber);
-    $properties = ["customerNumber" => $customerNumber,
-                   "oldCustomerName" => $oldCustomerName,
-                   "newCustomerName" => $newCustomerName,
-                  "oldCustomerAddress" => $oldCustomerAddress,
-                "newCustomerAddress" => $newCustomerAddress,
-              "oldPostalAddress" => $oldPostalAddress,
-            "newPostalAddress" => $newPostalAddress,
-          "oldPhoneNumber" => $oldPhoneNumber,
-        "newPhoneNumber" => $newPhoneNumber];
+    $carModel->editCar($licensePlate, $newBrand, $newColour, $newYear, $newPrice);
+    $properties = ["licensePlate" => $licensePlate,
+    "oldBrand" => $oldBrand,
+    "newBrand" => $newBrand,
+   "oldColour" => $oldColour,
+ "newColour" => $newColour,
+"oldYear" => $oldYear,
+"newYear" => $newYear,
+"oldPrice" => $oldPrice,
+"newPrice" => $newPrice];
     return $this->render("CarEdited.twig", $properties);
   }    
+
+
     
-  public function removeCar($customerNumber, $customerName) {
+  public function removeCar($licensePlate, $brand) {
     $carModel = new CarModel($this->db);
-    $numberOfAccounts = $carModel->removeCar($customerNumber);
-    $properties = ["customerNumber" => $customerNumber,
-                   "customerName" => $customerName,
-                   "numberOfAccounts" => $numberOfAccounts];
+    $numberOfCars = $carModel->removeCar($licensePlate);
+    $properties = ["licensePlate" => $licensePlate,
+                   "brand" => $brand];
     return $this->render("CarRemoved.twig", $properties);
   }
 
-  public function addAccount($customerNumber, $customerName) {
-    $customerModel = new CustomerModel($this->db);
-    $accountNumber = $customerModel->addAccount($customerNumber);
-    $properties = ["customerNumber" => $customerNumber,
-                   "customerName" => $customerName,
-                   "accountNumber" => $accountNumber];
-    return $this->render("AccountAdded.twig", $properties);
+  public function rentCar() {
+    $carModel = new CarModel($this->db);
+    $fetchCustomers = $carModel->fetchCustomers();
+    $fetchCars = $carModel->fetchCars();
+    $properties = ["customers" => $fetchCustomers, "cars" => $fetchCars];
+    return $this->render("RentCar.twig", $properties);
+  }
+
+  public function carRented() {
+    $form = $this->request->getForm();
+    var_dump($form);
+    $licensePlate = $form["licensePlate"];
+    $customerNumber = $form["customerNumber"];
+    $carModel = new CarModel($this->db);
+    $carRented = $carModel->rentCar($customerNumber, $licensePlate);
+    $properties = ["licensePlate" => $licensePlate, "customerNumber" => $customerNumber];
+    return $this->render("CarRented.twig", $properties);
   }
 }
+
+// public function addAccount($customerNumber, $customerName) {
+//   $customerModel = new CustomerModel($this->db);
+//   $accountNumber = $customerModel->addAccount($customerNumber);
+//   $properties = ["customerNumber" => $customerNumber,
+//                  "customerName" => $customerName,
+//                  "accountNumber" => $accountNumber];
+//   return $this->render("AccountAdded.twig", $properties);
+// }
+// }
+

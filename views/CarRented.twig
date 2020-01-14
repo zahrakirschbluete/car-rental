@@ -1,0 +1,9 @@
+{% block carRented %}
+  <h1>Car Rented</h1>
+
+  <p>The customer {{customerNumber}} has successfully rented the car {{licensePlate}}.</p>
+
+  <form method="post" action="/carsMenu">
+    <input type="submit" value="Ok">
+  </form>
+{% endblock %}

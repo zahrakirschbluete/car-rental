@@ -1,0 +1,27 @@
+{% block rentCar %}
+  <h1>Rent Car</h1>
+
+  <form method="post" action="/carRented">
+      Customer: <select name="customerNumber" autofocus="autofocus">
+   {% for customer in customers %}
+   
+     <option hidden disabled selected value>
+     -- Select customer --</option>
+      <option value={{customer.customerNumber}}>{{customer.customerNumber}} {{customer.customerName}}</option>
+      {% endfor %}
+      </select>
+      
+      Car: <select name="licensePlate" autofocus="autofocus">
+      <option hidden disabled selected value>
+     -- Select car --</option>
+   {% for car in cars %}
+   {% if not Booking.start%}
+     
+      <option value={{car.licensePlate}}>{{car.licensePlate}} {{car.colour}} {{car.brand}}</option>
+      {%endif%}
+      {% endfor %}
+      </select>
+      <input type="submit" value="Rent Car">
+  </form>
+  
+{% endblock %}
