@@ -1,0 +1,9 @@
+{% block carReturned %}
+  <h1>Car Returned</h1>
+
+  <p>The car {{licensePlate}} has successfully been returned.</p>
+
+  <form method="post" action="/carsMenu">
+    <input type="submit" value="Ok">
+  </form>
+{% endblock %}

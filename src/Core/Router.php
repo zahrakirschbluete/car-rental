@@ -37,7 +37,7 @@ class Router {
         $methodName = $info["method"];
         return call_user_func_array([$controller, $methodName], $map);
       }
-    }
+    } return "error";
   }
 
   private function match($route, $path, $params, &$map) {

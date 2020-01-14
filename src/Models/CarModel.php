@@ -17,10 +17,6 @@ $carsStatement->execute(["licensePlate" => $licensePlate,
     "colour" => $colour,
     "year" => $year,
     "price" => $price]);
-    // if ($carsStatement) die("Fatal error.");
-    //usually you'd use the commented line beneath if the customerNumber was auto incremented, but in this case it's redundant
-    // $customerNumber = $this->db->lastInsertId();
-    // return $customerNumber;
   }
 
   public function fetchColours() {
@@ -49,22 +45,45 @@ $carsStatement->execute(["licensePlate" => $licensePlate,
     return $brands;
   }
 
+  public function fetchCustomers() {
+    $customerRows = $this->db->query("SELECT * FROM Customers");
+    $customers = [];
+    
+    foreach ($customerRows as $customerRow) {
+      $customers[] = $customerRow;
+      var_dump($customerRow["customerName"]);
 
-  public function editCar($licensePlate, $newBrand, $newColour, $newYear, $newPrice, $start) {
-$carsQuery = "UPDATE SET brand = :brand, colour = :colour, year = :year, price = :price, start = :start " .
-                      "WHERE licensePlate = :licensePlate";
-$carsStatement = $this->db->prepareQuery;
+    }
+    return $customers;
+  }
+
+  
+  public function fetchCars() {
+    $carRows = $this->db->query("SELECT * FROM Cars");
+    $cars = [];
+    
+    foreach ($carRows as $carRow) {
+      $cars[] = $carRow;
+
+    }
+    return $cars;
+  }
+
+  public function editCar($licensePlate, $newBrand, $newColour, $newYear, $newPrice) {
+$carsQuery = "UPDATE Cars SET brand = :brand, colour = :colour, year = :year, price = :price " . 
+                  "WHERE licensePlate = :licensePlate";
+$carsStatement = $this->db->prepare($carsQuery);
 $carsParameters = ["licensePlate" => $licensePlate,
                             "brand" => $newBrand,
                             "colour" => $newColour,
                           "year" => $newYear,
-                        "price" => $newPrice,
-                    "start" => $start];
-$carsResult =$carsStatement->executeParameters;
+                        "price" => $newPrice];
+                        print_r($carsParameters);
+$carsResult = $carsStatement->execute($carsParameters);
     if ($carsResult) die($this->db->errorInfo()[2]);
   }
 
-  public function removeCustomer($customerNumber) {
+  public function removeCar($licensePlate) {
     // $accountsQuery = "SELECT COUNT(*) FROM Accounts WHERE customerNumber = :customerNumber";
     // $accountsStatement = $this->db->prepare($accountsQuery);
     // $accountsResult = $accountsStatement->execute(["customerNumber" => $customerNumber]);
@@ -73,21 +92,46 @@ $carsResult =$carsStatement->executeParameters;
     // $numberOfAccounts = htmlspecialchars($accountsRows[0]["COUNT(*)"]);
     
     // if ($numberOfAccounts == 0) {
-    $carsQuery = "DELETE FROM WHERE customerNumber = :customerNumber";
-    $carsStatement = $this->db->prepareQuery;
-    $carsResult =$Statement->execute(["customerNumber" => $customerNumber]);
+    $carsQuery = "DELETE FROM Cars WHERE licensePlate = :licensePlate";
+    $carsStatement = $this->db->prepare($carsQuery);
+    $carsResult =$carsStatement->execute(["licensePlate" => $licensePlate]);
       if ($carsResult) die($this->db->errorInfo()[2]);
     // }
 
     // return $numberOfAccounts;
   }  
 
-  public function addAccount($customerNumber) {
-    $accountsQuery = "INSERT INTO Accounts(customerNumber) VALUES(:customerNumber)";
-    $accountsStatement = $this->db->prepare($accountsQuery);
-    $accountsStatement->execute(["customerNumber" => $customerNumber]);
-    if (!$accountsStatement) die($this->db->errorInfo()[2]);
-    $accountNumber = $this->db->lastInsertId();
-    return $accountNumber;
-  }  
+  public function rentCar($customerNumber, $licensePlate) {
+
+    // var_dump($customerNumber);
+    // var_dump($licensePlate);
+    $carsQuery = "INSERT INTO Booking(customerNumber, licensePlate) " .
+                      "VALUES (:customerNumber, :licensePlate)";
+$rentStatement = $this->db->prepare($carsQuery);
+
+// $bookingRows = $this->db->query("SELECT * FROM Booking");
+
+    // if ($carsStatement) die("Fatal error.");
+    $properties = [":customerNumber" => $customerNumber,
+    ":licensePlate" => $licensePlate];
+    // var_dump($properties);
+    $result = $rentStatement->execute($properties);
+    // print_r($this->db->errorInfo());
+    // print_r($rentStatement);
+    // var_dump($result);
+  $bookingNumber = $this->db->lastInsertId();
+  // var_dump($this->db->errorinfo());
+  // var_dump($bookingNumber);
+  return $bookingNumber;
+ 
+  } 
 }
+//   public function addAccount($customerNumber) {
+//     $accountsQuery = "INSERT INTO Accounts(customerNumber) VALUES(:customerNumber)";
+//     $accountsStatement = $this->db->prepare($accountsQuery);
+//     $accountsStatement->execute(["customerNumber" => $customerNumber]);
+//     if (!$accountsStatement) die($this->db->errorInfo()[2]);
+//     $accountNumber = $this->db->lastInsertId();
+//     return $accountNumber;
+//   }  
+// }

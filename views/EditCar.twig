@@ -1,0 +1,34 @@
+{% block editCar %}
+  <h1>Edit Car</h1>
+
+  <form method="post" action="/carEdited/{{licensePlate}}/{{oldBrand}}/{{oldColour}}/{{oldYear}}/{{oldPrice}}">
+    License plate: <p>{{licensePlate}}</p>
+      Brand: <select name="brand" autofocus="autofocus">
+   {% for brand in brands %}
+   {%if (oldBrand == brand) %}
+   
+      <option selected value={{brand}}>{{brand}}</option>
+      {%else %}
+      <option value={{brand}}>{{brand}}</option>
+      {% endif%}
+      {% endfor %}
+      </select>
+      
+      Colour: <select name="colour" autofocus="autofocus">
+   {% for colour in colours %}
+   {%if (oldColour == colour) %}
+      <option selected value={{colour}}>{{colour}}</option>
+      {%else %}
+      <option value={{colour}}>{{colour}}</option>
+      {% endif%}
+      {% endfor %}
+      </select>
+
+    Year: <input type="text" name="year"
+           value="{{oldYear}}" autofocus="autofocus">
+
+    Price: <input type="text" name="price"
+           value="{{oldPrice}}" autofocus="autofocus">
+    <input type="submit" value="Ok">
+  </form>
+{% endblock %}

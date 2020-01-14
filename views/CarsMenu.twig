@@ -29,12 +29,12 @@
           </form>  
           </td>
             <td colspan="3">
-          <form action="/addCustomer" method="post">
+          <form action="/rentCar" method="post">
             <input class="btn nav-btn" type="submit" value="Rent Car">
           </form>  
           </td>
             <td colspan="3">
-          <form action="/addCustomer" method="post">
+          <form action="/returnCar" method="post">
             <input class="btn nav-btn" type="submit" value="Return Car">
           </form>  
           </td>
@@ -57,9 +57,21 @@
               <td colspan = "2"><b>{{car.colour}}</b></td>
               <td colspan = "2"><b>{{car.year}}</b></td>
               <td colspan = "2"><b>{{car.price}}</b></td>
+              <td colspan = "2"><b>{{car.customerNumber}}</b></td>
               <td colspan = "2"><b>{{car.start}}</b></td>
   
-
+          <td>
+            <form method="post" action="/editCar/{{car.licensePlate}}/{{car.brand}}/{{car.colour}}/{{car.year}}/{{car.price}}">
+              <input type="submit" style="width:100%" value="Edit">
+            </form>
+          </td>
+  
+          <td>
+            <form method="post" action="/removeCar/{{car.licensePlate}}/{{car.brand}}"
+                  onsubmit="return confirm('Are you sure you want to remove the car {{car.brand}} {{car.brand}} with the license plate number {{car.licensePlate}}?')">
+              <input type="submit" style="width:100%" value="Remove">
+            </form>
+          </td>
       {% endfor %}
     </table>
     

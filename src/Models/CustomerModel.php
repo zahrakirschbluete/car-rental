@@ -8,6 +8,7 @@ use Carrental\Exceptions\NotFoundException;
 use PDO;
 
 class CustomerModel extends AbstractModel {
+  //functions which tells the database to insert a new customer row with the nextmentioned parameters
   public function addCustomer($customerNumber, $customerName, $customerAddress, $postalAddress, $phoneNumber) {
     $customersQuery = "INSERT INTO Customers(customerNumber, customerName, customerAddress, postalAddress, phoneNumber) " .
                       "VALUES (:customerNumber, :customerName, :customerAddress, :postalAddress, :phoneNumber)";
@@ -18,12 +19,9 @@ class CustomerModel extends AbstractModel {
     "postalAddress" => $postalAddress,
     "phoneNumber" => $phoneNumber]);
     if (!$customersStatement) die("Fatal error.");
-    //usually you'd use the commented line beneath if the customerNumber was auto incremented, but in this case it's redundant
-    // $customerNumber = $this->db->lastInsertId();
-    // return $customerNumber;
   }
 
-
+// function which tells the database to update an already existing customer row with the nextmentioned parameters
   public function editCustomer($customerNumber, $newCustomerName, $newCustomerAddress, $newPostalAddress, $newPhoneNumber) {
     $customersQuery = "UPDATE Customers SET customerName = :customerName, customerAddress = :customerAddress, postalAddress = :postalAddress, phoneNumber = :phoneNumber " .
                       "WHERE customerNumber = :customerNumber";
@@ -37,6 +35,7 @@ class CustomerModel extends AbstractModel {
     if (!$customersResult) die($this->db->errorInfo()[2]);
   }
 
+  // function which tells the database to remove an already exisiting database
   public function removeCustomer($customerNumber) {
     // $accountsQuery = "SELECT COUNT(*) FROM Accounts WHERE customerNumber = :customerNumber";
     // $accountsStatement = $this->db->prepare($accountsQuery);
@@ -55,6 +54,7 @@ class CustomerModel extends AbstractModel {
     // return $numberOfAccounts;
   }  
 
+  
   public function addAccount($customerNumber) {
     $accountsQuery = "INSERT INTO Accounts(customerNumber) VALUES(:customerNumber)";
     $accountsStatement = $this->db->prepare($accountsQuery);
