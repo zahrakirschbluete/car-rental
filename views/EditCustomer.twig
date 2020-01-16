@@ -2,6 +2,8 @@
   <h1>Edit Customer</h1>
 
   <form method="post" action="/customerEdited/{{customerNumber}}/{{customerName}}/{{customerAddress}}/{{postalAddress}}/{{phoneNumber}}">
+Social security number: <input disabled type="text" name="customerNumber"
+           value="{{customerNumber}}" autofocus="autofocus">
     Name: <input type="text" name="customerName"
            value="{{customerName}}" autofocus="autofocus">
 
@@ -14,5 +16,8 @@
     Phone Number: <input type="text" name="phoneNumber"
            value="{{phoneNumber}}" autofocus="autofocus">
     <input type="submit" value="Ok">
+  </form>
+    <form method="post" action="/customersMenu">
+    <input type="submit" value="Cancel">
   </form>
 {% endblock %}

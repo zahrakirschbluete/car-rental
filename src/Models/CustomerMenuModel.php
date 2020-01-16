@@ -13,46 +13,33 @@ class CustomerMenuModel extends AbstractModel {
       
     $customers = [];
     foreach ($customerRows as $customerRow) {
+
+      
       $customerNumber = htmlspecialchars($customerRow["customerNumber"]);
       $customerName = htmlspecialchars($customerRow["customerName"]);
       $customerAddress = htmlspecialchars($customerRow["customerAddress"]);
       $postalAddress = htmlspecialchars($customerRow["postalAddress"]);
       $phoneNumber = htmlspecialchars($customerRow["phoneNumber"]);
+      $carQuery = "SELECT * FROM Cars where customerNumber = :customerNumber";
+      $carStatement = $this->db->prepare($carQuery);
+      $carResult = $carStatement->execute(["customerNumber" => $customerNumber]);
+      $carRows = $carStatement->fetchAll();
+      $car = [];
+      foreach ($carRows as $carRow) {
+        $statusRented = htmlspecialchars($carRow["statusRented"]);
+
+        $car = ["statusRented" => $statusRented];
+      }
+
+      $statusRented = $car["statusRented"] ?? 0;
       $customer = ["customerNumber" => $customerNumber,
                    "customerName" => $customerName,
                   "customerAddress" => $customerAddress,
                 "postalAddress" => $postalAddress,
-              "phoneNumber" => $phoneNumber
+              "phoneNumber" => $phoneNumber,
+              "statusRented" => $statusRented
             ];        
         
-      // $accountsQuery = "SELECT * FROM Accounts WHERE customerNumber = :customerNumber";
-      // $accountsStatement = $this->db->prepare($accountsQuery);
-      // $accountsResult = $accountsStatement->execute(["customerNumber" => $customerNumber]);
-      // // if (!$accountsResult) die($this->db->errorInfo());
-      // $accountsRows = $accountsStatement->fetchAll();
-
-      // $accounts = [];
-      // foreach ($accountsRows as $accountRow) {
-      //   $accountNumber = htmlspecialchars($accountRow["accountNumber"]);
-      //   $account = ["accountNumber" => $accountNumber];
-        
-      //   $balanceQuery = "SELECT SUM(amount) FROM Events WHERE accountNumber = :accountNumber";
-      //   $balanceStatement = $this->db->prepare($balanceQuery);
-      //   $balanceResult = $balanceStatement->execute(["accountNumber" => $accountNumber]);
-      //   if (!$balanceResult) die($this->db->errorInfo());
-
-      //   $balanceRows = $balanceStatement->fetchAll();
-      //   $accountBalance = htmlspecialchars($balanceRows[0]["SUM(amount)"]);
-        
-      //   if ($accountBalance === "") {
-      //     $accountBalance = "0";
-      //   }
-
-      //   $account["accountBalance"] = $accountBalance;
-      //   $accounts[] = $account;
-      // }
-
-      // $customer["accounts"] = $accounts;
       $customers[] = $customer;
     }
 

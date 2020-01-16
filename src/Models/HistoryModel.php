@@ -9,7 +9,6 @@ use PDO;
 class HistoryModel extends AbstractModel {
   public function historyList() {
     $bookingRows = $this->db->query("SELECT * FROM Booking");
-    print_r($bookingRows);
     if (!$bookingRows) die($this->db->errorInfo());
     $bookings = [];
     
@@ -18,20 +17,22 @@ class HistoryModel extends AbstractModel {
       $customerNumber = htmlspecialchars($bookingRow["customerNumber"]);
       $start = htmlspecialchars($bookingRow["start"]);
       $end = htmlspecialchars($bookingRow["end"]);
-      $lookupQuery = "select price from Cars where licensePlate = :licensePlate";
+      $bookingNumber = htmlspecialchars($bookingRow["bookingNumber"]);
+      $lookupQuery = "select price from Booking where bookingNumber = :bookingNumber";
     $lookup = $this->db->prepare($lookupQuery);
-    $lookup->execute([":licensePlate" => $licensePlate]);
+    $lookup->execute(["bookingNumber" => $bookingNumber]);
     $selectedRow = $lookup->fetch();
     $price = $selectedRow["price"];
     
       $startDate = new \DateTime($start);
 $endDate = new \DateTime($end);
 $diff = $endDate->diff($startDate);
-var_dump($diff);
+
 $days = $diff->days + 1;
-var_dump($days);
+
 
 $cost = $price * $days;
+
 
 
       $booking = ["licensePlate" => $licensePlate,
@@ -71,7 +72,7 @@ $cost = $price * $days;
     //   $customer["accounts"] = $accounts;
       $bookings[] = $booking;
     }
-      var_dump($bookings);
+
     return $bookings;
   }
 }

@@ -48,19 +48,56 @@
         </main>
        
     
-  <table border>
+  <table id="cars" border>
+   <thead>
+ <tr>
+  <th><b>License Plate</b></td>
+    <th><b>Brand</b></th>
+    <th><b>Colour</b></th>
+    <th><b>Year</b></th>
+    <th><b>Price</b></th>
+    <th><b>Rented by</b></th>
+    <th><b>Rental Date</b></th>
+    </tr>
+ </thead>
   {% for car in cars %}
-  {% if rentedCars.end == NULL %}
+
         <tr>
-              <td colspan = "2"><b>{{car.licensePlate}}</b></td>
-              <td colspan = "2"><b>{{car.brand}}</b></td>
-              <td colspan = "2"><b>{{car.colour}}</b></td>
-              <td colspan = "2"><b>{{car.year}}</b></td>
-              <td colspan = "2"><b>{{car.price}}</b></td>
-              <td colspan = "2"><b>{{car.customerNumber}}</b></td>
-              <td colspan = "2"><b>{{car.start}}</b></td>
+              <td><b>{{car.licensePlate}}</b></td>
+              <td><b>{{car.brand}}</b></td>
+              <td><b>{{car.colour}}</b></td>
+              <td><b>{{car.year}}</b></td>
+              <td><b>{{car.price}}</b></td>
+              {% if car.customerNumber == "" %}
+              <td><b>Available</b></td>
+              {% else %}
+              <td><b>{{car.customerNumber}}</b></td>
+
+              {% endif %}
+              {% if car.start %}
+              <td><b>{{car.start}}</b></td>
+              {% else %}
+              <td><b>&nbsp;</b></td>
+              {% endif %}
+
+  
+          
+           {% if car.statusRented == 0 %}
+          <td>
+            <form method="post" action="/editCar/{{car.licensePlate}}/{{car.brand}}/{{car.colour}}/{{car.year}}/{{car.price}}">
+              <input type="submit" style="width:100%" value="Edit">
+            </form>
+          </td>
   
           <td>
+            <form method="post" action="/removeCar/{{car.licensePlate}}/{{car.brand}}"
+                  onsubmit="return confirm('Are you sure you want to remove the car {{car.brand}} {{car.brand}} with the license plate number {{car.licensePlate}}?')">
+              <input type="submit" style="width:100%" value="Remove">
+            </form>
+          </td>
+          
+          {% else %}
+            <td>
             <form method="post" action="/editCar/{{car.licensePlate}}/{{car.brand}}/{{car.colour}}/{{car.year}}/{{car.price}}">
               <input disabled type="submit" style="width:100%" value="Edit">
             </form>
@@ -72,7 +109,9 @@
               <input disabled type="submit" style="width:100%" value="Remove">
             </form>
           </td>
+          
           {% endif %}
+          </tr>
       {% endfor %}
     </table>
     
