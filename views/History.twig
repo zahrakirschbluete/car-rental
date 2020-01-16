@@ -46,9 +46,20 @@
           </td></tr>
 
     </nav>
-   <aside class="commercialpicture">
-    <img src="../untitled-2.png">
-  </aside>
-        </main>
+            </main>
+     <table border>
+ {% for booking in bookings %}
+        <tr>
+              <td colspan = "2"><b>{{booking.licensePlate}}</b></td>
+              <td colspan = "2"><b>{{booking.customerNumber}}</b></td>
+              <td colspan = "2"><b>{{booking.start}}</b></td>
+              <td colspan = "2"><b>{{booking.end}}</b></td>
+              <td colspan = "2"><b>{{booking.days}}</b></td>
+              <td colspan = "2"><b>{{booking.cost}}</b></td>
+          <tr>
+
+      {% endfor %}
+
+
 
         {% endblock %}

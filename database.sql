@@ -63,27 +63,28 @@ CREATE TABLE Cars (
 	year VARCHAR(4) NOT NULL,
 	price FLOAT NOT NULL,
     customerNumber CHAR(10),
+    statusRented boolean not null default 0,
+    start DATETIME NULL,
     PRIMARY KEY (licensePlate),
     FOREIGN KEY (colour) REFERENCES Colours(colour),
     FOREIGN KEY (brand) REFERENCES Brands(brand),
     FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber)
 );
 
-INSERT INTO Cars(licensePlate, brand, colour, price, year) VALUES
-    ('ABC123', 'Fiat', 'red', 100, 1989),
-    ('FBI911', 'Fiat', 'red', 100, 1989),
-    ('BDD196', 'Fiat', 'red', 100, 1989);
+INSERT INTO `Cars` (`licensePlate`, `colour`, `brand`, `price`, `year`) VALUES
+('ABC123',	'Red',	'Fiat',	100,	2002),
+('FBI911',	'Black',	'Suzuki',	900,	2018),
+('BDD196',	'Black',	'Volkswagen',	700,	2015),
+('ADD191',	'Red',	'Chrystler',	450,	2019);
 
 
 CREATE TABLE Booking (
     bookingNumber INT UNSIGNED NOT NULL AUTO_INCREMENT,
     customerNumber CHAR(10) NOT NULL,
     licensePlate VARCHAR(6),
-    start TIMESTAMP NOT NULL,
+    start DATETIME NULL,
     end DATETIME NULL,
     FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber),
     FOREIGN KEY (licensePlate) REFERENCES Cars(licensePlate),
     PRIMARY KEY (bookingNumber)
 );
-
-

@@ -14,12 +14,17 @@
       Car: <select name="licensePlate" autofocus="autofocus">
       <option hidden disabled selected value>
      -- Select car --</option>
-   {% for car in cars %}
-   {% if not Booking.start%}
      
-      <option value={{car.licensePlate}}>{{car.licensePlate}} {{car.colour}} {{car.brand}}</option>
-      {%endif%}
+   {% for car in cars %}
+   {# {% for rentedCar in rentedCars %} #}
+   {# {% if rentedCar.start %} #}
+     
+      <option value={{car.licensePlate}}>{{car.licensePlate}}</option>
+      
+      {# {% endif %}
+{% endfor %} #}
       {% endfor %}
+      
       </select>
       <input type="submit" value="Rent Car">
   </form>

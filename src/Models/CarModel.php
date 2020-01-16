@@ -51,7 +51,6 @@ $carsStatement->execute(["licensePlate" => $licensePlate,
     
     foreach ($customerRows as $customerRow) {
       $customers[] = $customerRow;
-      var_dump($customerRow["customerName"]);
 
     }
     return $customers;
@@ -78,7 +77,6 @@ $carsParameters = ["licensePlate" => $licensePlate,
                             "colour" => $newColour,
                           "year" => $newYear,
                         "price" => $newPrice];
-                        print_r($carsParameters);
 $carsResult = $carsStatement->execute($carsParameters);
     if ($carsResult) die($this->db->errorInfo()[2]);
   }
@@ -102,29 +100,91 @@ $carsResult = $carsStatement->execute($carsParameters);
   }  
 
   public function rentCar($customerNumber, $licensePlate) {
+    
+    
+    
+    $rentQuery = "update Cars set statusRented = 1, customerNumber = :customerNumber, start = NOW() where licensePlate = :licensePlate ";
+    $rentStatus = $this->db->prepare($rentQuery);
+    $rentStatus->execute([":licensePlate" => $licensePlate, "customerNumber" => $customerNumber]);
 
     // var_dump($customerNumber);
     // var_dump($licensePlate);
-    $carsQuery = "INSERT INTO Booking(customerNumber, licensePlate) " .
-                      "VALUES (:customerNumber, :licensePlate)";
-$rentStatement = $this->db->prepare($carsQuery);
+    // $carsQuery = "INSERT INTO Booking(customerNumber, licensePlate, start) " .
+    //                   "VALUES (:customerNumber, :licensePlate, NOW())";
+   
+   
+ 
+
+
+
+// $rentStatement = $this->db->prepare($carsQuery);
 
 // $bookingRows = $this->db->query("SELECT * FROM Booking");
 
     // if ($carsStatement) die("Fatal error.");
-    $properties = [":customerNumber" => $customerNumber,
-    ":licensePlate" => $licensePlate];
-    // var_dump($properties);
-    $result = $rentStatement->execute($properties);
+    // $properties = [":customerNumber" => $customerNumber,
+    // ":licensePlate" => $licensePlate];
+    // // var_dump($properties);
+    // $result = $rentStatement->execute($properties);
+
     // print_r($this->db->errorInfo());
     // print_r($rentStatement);
     // var_dump($result);
-  $bookingNumber = $this->db->lastInsertId();
-  // var_dump($this->db->errorinfo());
-  // var_dump($bookingNumber);
-  return $bookingNumber;
+  // $bookingNumber = $this->db->lastInsertId();
+  // // var_dump($this->db->errorinfo());
+  // // var_dump($bookingNumber);
+   // $bookingNumber = $this->db->lastInsertId();
+  // return $bookingNumber;
  
   } 
+
+  // public function fetchAvailableCars() {
+  //   $rentedRows = $this->db->query("SELECT * FROM Cars where start IS NULL");
+  //   $rentedCars = [];
+    
+  //   foreach ($availableRows as $availableRow) {
+  //     $Cars[] = $rentedRow;
+
+  //   }
+  //   return $rentedCars;
+  // }
+
+  public function fetchRentedCars() {
+    $rentedRows = $this->db->query("SELECT * FROM Cars where statusRented = 1");
+    $rentedCars = [];
+    
+    foreach ($rentedRows as $rentedRow) {
+      $rentedCars[] = $rentedRow;
+
+    }
+    return $rentedCars;
+  }
+
+  public function returnCar($licensePlate) {
+    $lookupQuery = "select customerNumber, start FROM Cars where licensePlate = :licensePlate";
+    $lookup = $this->db->prepare($lookupQuery);
+    $lookup->execute([":licensePlate" => $licensePlate]);
+    $selectedRow = $lookup->fetch();
+    $customerNumber = $selectedRow["customerNumber"];
+    $start = $selectedRow["start"];
+    $statusQuery = "update Cars set statusRented = 0, customerNumber = NULL, start = NULL where licensePlate = :licensePlate ";
+    $rentStatus = $this->db->prepare($statusQuery);
+    $rentStatus->execute([":licensePlate" => $licensePlate]);
+
+
+      $carsQuery = "INSERT into Booking(licensePlate, customerNumber, start, end)" . 
+      "VALUES (:licensePlate, :customerNumber, :start, NOW())";
+  $rentStatement = $this->db->prepare($carsQuery);
+      $properties = [
+      "licensePlate" => $licensePlate,
+    "customerNumber" => $customerNumber,
+  "start" => $start];
+
+      $result = $rentStatement->execute($properties);
+
+      $bookingNumber = $this->db->lastInsertId();
+      return $bookingNumber;
+  }
 }
 //   public function addAccount($customerNumber) {
 //     $accountsQuery = "INSERT INTO Accounts(customerNumber) VALUES(:customerNumber)";

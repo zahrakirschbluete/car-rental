@@ -1,12 +1,13 @@
 {% block carRemoved %}
-  <h1>Customer Removed</h1>
+  <h1>Car Removed</h1>
 
-
+{% if not car.start == NULL %}
     <p>The car with license plate number {{licensePlate}} has been removed.</p>
 
+{% else %}
     <p><i>The car with the license plate number {{licensePlate}}
        cannot be removed since they are currently being rented.</i></p>
-
+{% endif %}
   
   <form method="post" action="/carsMenu">
     <input type="submit" value="Ok">

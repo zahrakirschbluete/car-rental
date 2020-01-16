@@ -1,5 +1,15 @@
 {% block returnCar %}
   <h1>Return Car</h1>
-
   
+    <form method="post" action="/carReturned">
+      Car: <select name="licensePlate" autofocus="autofocus">
+   {% for rentedCar in rentedCars %}
+   
+     <option hidden disabled selected value>
+     -- Select car --</option>
+      <option value={{rentedCar.licensePlate}}>{{rentedCar.licensePlate}}</option>
+      {% endfor %}
+      </select>
+      <input type="submit" value="Return Car">
+  </form>
 {% endblock %}
