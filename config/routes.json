@@ -106,7 +106,7 @@
   },
   "history": {
     "controller": "History",
-    "method": "customerList"
+    "method": "historyList"
   },
   "": {
     "controller": "MainMenu",

@@ -8,13 +8,32 @@ use PDO;
 
 class CarsMenuModel extends AbstractModel {
   public function carList() {
-    $carRows = $this->db->query("SELECT * FROM Cars join Booking WHERE Cars.licensePlate = Booking.licensePlate");
+    // $carRows = $this->db->query("SELECT  from Cars left outer join Booking on Cars.licensePlate = Booking.licensePlate");
+    $carRows = $this->db->query("    SELECT * FROM Cars
+
+");
     $brandRows = $this->db->query("SELECT * FROM Brands");
-    $customerRows = $this->db->query("SELECT * FROM Cars join Customers WHERE Cars.customerNumber = Customers.customerNumber");
+    // $customerRows = $this->db->query("SELECT * FROM Cars join Customers WHERE Cars.customerNumber = Customers.customerNumber");
     if (!$carRows) die($this->db->errorInfo());
     if (!$brandRows) die($this->db->errorInfo());
       
     $cars = [];
+    // SELECT Cars.licensePlate as license, 
+    // Cars.brand ,  
+    // colour,  
+    // year , 
+    // price,  
+    // Booking.customerNumber , 
+
+      
+    //   bookingNumber , 
+ 
+    //   start,  
+    //   end 
+    //   from Cars left join Booking on Cars.licensePlate = Booking.licensePlate
+      
+    //   where Booking.end IS NULL;
+    
     foreach ($carRows as $carRow) {
       $licensePlate = htmlspecialchars($carRow["licensePlate"]);
       $brand = htmlspecialchars($carRow["brand"]);
@@ -30,35 +49,6 @@ class CarsMenuModel extends AbstractModel {
                   "price" => $price,
                   "customerNumber" => $customerNumber,
                   "start" => $start];      
-        
-    //   $accountsQuery = "SELECT * FROM Accounts WHERE customerNumber = :customerNumber";
-    //   $accountsStatement = $this->db->prepare($accountsQuery);
-    //   $accountsResult = $accountsStatement->execute(["customerNumber" => $customerNumber]);
-    // //   if (!$accountsResult) die($this->db->errorInfo());
-    //   $accountsRows = $accountsStatement->fetchAll();
-
-    //   $accounts = [];
-    //   foreach ($accountsRows as $accountRow) {
-    //     $accountNumber = htmlspecialchars($accountRow["accountNumber"]);
-    //     $account = ["accountNumber" => $accountNumber];
-        
-    //     $balanceQuery = "SELECT SUM(amount) FROM Events WHERE accountNumber = :accountNumber";
-    //     $balanceStatement = $this->db->prepare($balanceQuery);
-    //     $balanceResult = $balanceStatement->execute(["accountNumber" => $accountNumber]);
-    //     if (!$balanceResult) die($this->db->errorInfo());
-
-    //     $balanceRows = $balanceStatement->fetchAll();
-    //     $accountBalance = htmlspecialchars($balanceRows[0]["SUM(amount)"]);
-        
-    //     if ($accountBalance === "") {
-    //       $accountBalance = "0";
-    //     }
-
-    //     $account["accountBalance"] = $accountBalance;
-    //     $accounts[] = $account;
-    //   }
-
-    //   $customer["accounts"] = $accounts;
       $cars[] = $car;
     }
       
