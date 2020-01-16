@@ -35,23 +35,28 @@ class CustomerModel extends AbstractModel {
     if (!$customersResult) die($this->db->errorInfo()[2]);
   }
 
-  // function which tells the database to remove an already exisiting database
+  // function which tells the database to remove an already exisiting row
   public function removeCustomer($customerNumber) {
-    // $accountsQuery = "SELECT COUNT(*) FROM Accounts WHERE customerNumber = :customerNumber";
-    // $accountsStatement = $this->db->prepare($accountsQuery);
-    // $accountsResult = $accountsStatement->execute(["customerNumber" => $customerNumber]);
-    // if (!$accountsResult) die($this->db->errorInfo()[2]);
-    // $accountsRows = $accountsStatement->fetchAll();
-    // $numberOfAccounts = htmlspecialchars($accountsRows[0]["COUNT(*)"]);
+    // $carsQuery = "SELECT COUNT(*) FROM Cars WHERE customerNumber = :customerNumber";
+    // $carsStatement = $this->db->prepare($carsQuery);
+    // $carsResult = $carsStatement->execute(["customerNumber" => $customerNumber]);
+    // if (!$carsResult) die($this->db->errorInfo()[2]);
+    // $carsRows = $carsStatement->fetchAll();
+    // $numberOfCars = htmlspecialchars($carsRows[0]["COUNT(*)"]);
     
-    // if ($numberOfAccounts == 0) {
+    // if ($numberOfCars == 0) {
+
+      $bookingQuery = "UPDATE Booking SET customerNumber = NULL, licensePlate = NULL WHERE customerNumber = :customerNumber";
+      $bookingStatement = $this->db->prepare($bookingQuery);
+      $bookingResult = $bookingStatement->execute(["customerNumber" => $customerNumber]);
+      
       $customersQuery = "DELETE FROM Customers WHERE customerNumber = :customerNumber";
       $customersStatement = $this->db->prepare($customersQuery);
       $customersResult = $customersStatement->execute(["customerNumber" => $customerNumber]);
       if (!$customersResult) die($this->db->errorInfo()[2]);
     // }
 
-    // return $numberOfAccounts;
+    // return $numberOfCars;
   }  
 
   

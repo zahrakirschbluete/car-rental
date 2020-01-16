@@ -72,19 +72,10 @@ class CustomerController extends AbstractController {
     $customerModel = new CustomerModel($this->db);
     $numberOfAccounts = $customerModel->removeCustomer($customerNumber);
     $properties = ["customerNumber" => $customerNumber,
-                   "customerName" => $customerName,
-                   "numberOfAccounts" => $numberOfAccounts];
+                   "customerName" => $customerName];
     return $this->render("CustomerRemoved.twig", $properties);
   }
 
   
 
-  public function addAccount($customerNumber, $customerName) {
-    $customerModel = new CustomerModel($this->db);
-    $accountNumber = $customerModel->addAccount($customerNumber);
-    $properties = ["customerNumber" => $customerNumber,
-                   "customerName" => $customerName,
-                   "accountNumber" => $accountNumber];
-    return $this->render("AccountAdded.twig", $properties);
-  }
 }

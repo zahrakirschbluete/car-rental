@@ -2,7 +2,8 @@
   <h1>Edit Car</h1>
 
   <form method="post" action="/carEdited/{{licensePlate}}/{{oldBrand}}/{{oldColour}}/{{oldYear}}/{{oldPrice}}">
-    License plate: <p>{{licensePlate}}</p>
+    License plate: <input disabled type="text" name="licensePlate"
+           value="{{licensePlate}}" autofocus="autofocus">
       Brand: <select name="brand" autofocus="autofocus">
    {% for brand in brands %}
    {%if (oldBrand == brand) %}
@@ -30,5 +31,8 @@
     Price: <input type="text" name="price"
            value="{{oldPrice}}" autofocus="autofocus">
     <input type="submit" value="Ok">
+  </form>
+    <form method="post" action="/carsMenu">
+    <input type="submit" value="Cancel">
   </form>
 {% endblock %}

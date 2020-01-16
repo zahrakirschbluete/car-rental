@@ -49,16 +49,28 @@
        
     
   <table border>
+  <thead>
+  <tr>
+    <th><b>Social Security Number</b></td>
+    <th><b>Name</b></th>
+    <th><b>Address</b></th>
+    <th><b>Postal Address</b></th>
+    <th><b>Phone Number</b></th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
   
   {% for customer in customers %}
+ 
         <tr>
           <td><b>{{customer.customerNumber}}</b></td>
-              <td colspan = "2"><b>{{customer.customerName}}</b></td>
-              <td colspan = "2"><b>{{customer.customerAddress}}</b></td>
-              <td colspan = "2"><b>{{customer.postalAddress}}</b></td>
-              <td colspan = "2"><b>{{customer.phoneNumber}}</b></td>
+              <td><b>{{customer.customerName}}</b></td>
+              <td><b>{{customer.customerAddress}}</b></td>
+              <td><b>{{customer.postalAddress}}</b></td>
+              <td><b>{{customer.phoneNumber}}</b></td>
   
           <td>
+           {% if customer.statusRented == 0 %}
             <form method="post" action="/editCustomer/{{customer.customerNumber}}/{{customer.customerName}}/{{customer.customerAddress}}/{{customer.postalAddress}}/{{customer.phoneNumber}}">
               <input type="submit" style="width:100%" value="Edit">
             </form>
@@ -70,6 +82,20 @@
               <input type="submit" style="width:100%" value="Remove">
             </form>
           </td>
+
+          {% else %}
+                      <form method="post" action="/editCustomer/{{customer.customerNumber}}/{{customer.customerName}}/{{customer.customerAddress}}/{{customer.postalAddress}}/{{customer.phoneNumber}}">
+              <input disabled type="submit" style="width:100%" value="Edit">
+            </form>
+          </td>
+  
+          <td>
+            <form method="post" action="/removeCustomer/{{customer.customerNumber}}/{{customer.customerName}}"
+                  onsubmit="return confirm('Are you sure you want to remove customer {{customer.customerName}}?')">
+              <input disabled type="submit" style="width:100%" value="Remove">
+            </form>
+          </td>
+          {% endif %}
       {% endfor %}
     </table>
     

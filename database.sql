@@ -67,8 +67,7 @@ CREATE TABLE Cars (
     start DATETIME NULL,
     PRIMARY KEY (licensePlate),
     FOREIGN KEY (colour) REFERENCES Colours(colour),
-    FOREIGN KEY (brand) REFERENCES Brands(brand),
-    FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber)
+    FOREIGN KEY (brand) REFERENCES Brands(brand)
 );
 
 INSERT INTO `Cars` (`licensePlate`, `colour`, `brand`, `price`, `year`) VALUES
@@ -80,10 +79,11 @@ INSERT INTO `Cars` (`licensePlate`, `colour`, `brand`, `price`, `year`) VALUES
 
 CREATE TABLE Booking (
     bookingNumber INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    customerNumber CHAR(10) NOT NULL,
+    customerNumber CHAR(10) NULL,
     licensePlate VARCHAR(6),
     start DATETIME NULL,
     end DATETIME NULL,
+    price FLOAT NOT NULL,
     FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber),
     FOREIGN KEY (licensePlate) REFERENCES Cars(licensePlate),
     PRIMARY KEY (bookingNumber)

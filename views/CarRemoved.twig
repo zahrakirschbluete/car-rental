@@ -1,7 +1,7 @@
 {% block carRemoved %}
   <h1>Car Removed</h1>
 
-{% if not car.start == NULL %}
+{% if statusRented == 0 %}
     <p>The car with license plate number {{licensePlate}} has been removed.</p>
 
 {% else %}

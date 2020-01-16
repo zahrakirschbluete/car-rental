@@ -48,14 +48,24 @@
     </nav>
             </main>
      <table border>
+        <thead>
+ <tr>
+  <th><b>License Plate</b></td>
+    <th><b>Social Security Number</b></th>
+    <th><b>Rental date</b></th>
+    <th><b>Return date</b></th>
+    <th><b>Days</b></th>
+    <th><b>Total cost</b></th>
+    </tr>
+ </thead>
  {% for booking in bookings %}
         <tr>
-              <td colspan = "2"><b>{{booking.licensePlate}}</b></td>
-              <td colspan = "2"><b>{{booking.customerNumber}}</b></td>
-              <td colspan = "2"><b>{{booking.start}}</b></td>
-              <td colspan = "2"><b>{{booking.end}}</b></td>
-              <td colspan = "2"><b>{{booking.days}}</b></td>
-              <td colspan = "2"><b>{{booking.cost}}</b></td>
+              <td><b>{{booking.licensePlate}}</b></td>
+              <td><b>{{booking.customerNumber}}</b></td>
+              <td><b>{{booking.start}}</b></td>
+              <td><b>{{booking.end}}</b></td>
+              <td><b>{{booking.days}}</b></td>
+              <td><b>{{booking.cost}}</b></td>
           <tr>
 
       {% endfor %}
