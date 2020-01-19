@@ -9,7 +9,6 @@
         box-sizing: border-box;
         font-family: "Source Sans Pro";
         height: 100%;
-
       
       }
     
@@ -38,7 +37,6 @@
   
       .main {
         padding: 20px;
-        
   
       }
   
@@ -69,7 +67,6 @@
       nav {
           display: flex;
           flex-flow: row wrap;
-          
 
       }
   
@@ -77,43 +74,14 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        
     }
 
-.mainsection {
-    background-color: #f8f9fa;
-    width: 100%;
-}
-    .form {
-        margin-left: 31%;
-        width: 37%;
-        background-color: #f8f9fa;
+    .form > form > fieldset {
+      padding: 25px;
+    }
 
-
-        > form > fieldset {
-            padding: 0px 50px 50px 50px;
-            border: none;
-            
-          }
-          label {
-              display: flex;
-              flex-flow: column nowrap;
-              margin-bottom: 5px;
-              text-transform: uppercase;
-              font-weight: bold;
-          }
-          input {
-            box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
-            border-radius: 8px;
-            border-color: transparent;
-            padding: 4px;
-            text-transform: uppercase;
-            font-weight: bold;
-          }
-
-          .add-btn {
-              padding: 10px;
-          }
+    .formHeader {
+      text-align: center;
     }
   
   @media (min-width: 769px) {

@@ -13,6 +13,8 @@ abstract class AbstractController {
     protected $customerId;
     protected $di;
 
+    //tanken med dependencyinjector är att programmet ska veta så lite 
+    //som möjligt om de andra systemen som det kommuniceras med, ex att den inte behöver veta om databasen är SQL, mySQL, eller mongoDB.
     public function __construct(DependencyInjector $di, Request $request) {
         $this->request = $request;
         $this->di = $di;

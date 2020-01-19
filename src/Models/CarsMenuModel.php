@@ -6,18 +6,18 @@ use Carrental\Exceptions\DbException;
 use Carrental\Exceptions\NotFoundException;
 use PDO;
 
-class CarsMenuModel extends AbstractModel {
-  public function carList() {
-    // $carRows = $this->db->query("SELECT  from Cars left outer join Booking on Cars.licensePlate = Booking.licensePlate");
+class CarsMenuModel extends AbstractModel
+{
+  public function carList()
+  {
     $carRows = $this->db->query("SELECT * FROM Cars");
     $brandRows = $this->db->query("SELECT * FROM Brands");
-    // $customerRows = $this->db->query("SELECT * FROM Cars join Customers WHERE Cars.customerNumber = Customers.customerNumber");
     if (!$carRows) die($this->db->errorInfo());
     if (!$brandRows) die($this->db->errorInfo());
-      
+
     $cars = [];
 
-    
+
     foreach ($carRows as $carRow) {
       $licensePlate = htmlspecialchars($carRow["licensePlate"]);
       $brand = htmlspecialchars($carRow["brand"]);
@@ -38,17 +38,19 @@ class CarsMenuModel extends AbstractModel {
       }
 
       $statusRented = $status["statusRented"] ?? "";
-      $car = ["licensePlate" => $licensePlate,
-                  "brand" => $brand,
-                   "colour" => $colour,
-                   "year" => $year,
-                  "price" => $price,
-                  "customerNumber" => $customerNumber,
-                  "start" => $start,
-                "statusRented" => $statusRented];      
+      $car = [
+        "licensePlate" => $licensePlate,
+        "brand" => $brand,
+        "colour" => $colour,
+        "year" => $year,
+        "price" => $price,
+        "customerNumber" => $customerNumber,
+        "start" => $start,
+        "statusRented" => $statusRented
+      ];
       $cars[] = $car;
     }
-      
+
     return $cars;
   }
 }

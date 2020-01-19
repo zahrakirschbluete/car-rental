@@ -7,10 +7,45 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 </head>
   <main role="main" class="main">
-    <h1>Add Car</h1>
+        <section class="statement">
+        <header>
+          <h2>Renting Done Right. </br> Finally.</h2>
+        </header>
+     
+      </section>
+    <nav region="navigation">
+
+              <tr><td colspan="3">
+          <form action="/customersMenu" method="post">
+            <input class="btn nav-btn" type="submit" value="Customers">
+          </form> 
+          </td>
+            <td colspan="3">
+          <form action="/carsMenu" method="post">
+            <input class="btn nav-btn" type="submit" value="Cars">
+          </form>  
+          </td>
+            <td colspan="3">
+          <form action="/rentCar" method="post">
+            <input class="btn nav-btn" type="submit" value="Rent Car">
+          </form>  
+          </td>
+            <td colspan="3">
+          <form action="/returnCar" method="post">
+            <input class="btn nav-btn" type="submit" value="Return Car">
+          </form>  
+          </td>
+           <td colspan="3">
+          <form action="/history" method="post">
+            <input class="btn nav-btn" type="submit" value="History">
+          </form>  
+          </td></tr>
+
+    </nav>
+    <h2>Add Car</h2>
   
-    <form method="post" action="/carAdded">
-      License plate: <input type="text" name="licensePlate" autofocus="autofocus">
+    <form id="addCar" method="post" action="">
+      License plate: <input id="licensePlate" type="text" name="licensePlate" autofocus="autofocus" maxlength="6">
 
       Brand: <select name="brand" autofocus="autofocus">
    {% for brand in brands %}
@@ -24,11 +59,30 @@
       {% endfor %}
       </select>
 
-    Year: <input type="text" name="year" autofocus="autofocus">
+    Year: <input id="year" type="text" name="year" autofocus="autofocus">
 
-    Price: <input type="text" name="price" autofocus="autofocus">
-    <input type="submit" value="Ok">
+    Price: <input id="price" type="text" name="price" autofocus="autofocus">
+    <input type="submit" value="Ok" onclick="validation()">
     </form>
     
   </main>
+        <script>
+
+    function validation() {
+      //lagrar year input
+      let year = document.getElementById("year").value;
+      //lagrar price input
+      let price = document.getElementById("price").value;
+      //lagrar licensePlate input
+      let licensePlate = document.getElementById("licensePlate").value;
+      let regx = /^[a-z A-Z]{3}\d{3}$/;
+      
+      if(regx.test(licensePlate) && price > 0 && year > 1900 && year < 2020) {
+        document.getElementById("addCar").action = "/carAdded";
+
+      } else {
+        alert("Invalid input. Please note that the license plate must start with 3 letters and end with 3 numbers. Furthermore, the price cannot be negative and the year must be between 1900-2019.");
+      }
+      }
+      </script>
 {% endblock %}

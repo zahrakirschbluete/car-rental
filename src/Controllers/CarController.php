@@ -1,18 +1,22 @@
 <?php
 
 namespace Carrental\Controllers;
+
 use Carrental\Exceptions\NotFoundException;
 use Carrental\Models\CarModel;
 
-class CarController extends AbstractController {
-  public function addCar() {
+class CarController extends AbstractController
+{
+  public function addCar()
+  {
     $CarModel = new CarModel($this->db);
     $fetchColours = $CarModel->fetchColours();
     $fetchBrands = $CarModel->fetchBrands();
     return $this->render("AddCar.twig", ["colours" => $fetchColours, "brands" => $fetchBrands]);
   }
-    
-  public function carAdded() {
+
+  public function carAdded()
+  {
     $form = $this->request->getForm();
     $licensePlate = $form["licensePlate"];
     $brand = $form["brand"];
@@ -21,31 +25,37 @@ class CarController extends AbstractController {
     $price = $form["price"];
     $carModel = new CarModel($this->db);
     $newCar = $carModel->addCar($licensePlate, $brand, $colour, $year, $price);
-    $properties = ["licensePlate" => $licensePlate,
-                   "brand" => $brand,
-                  "colour" => $colour,
-                "year" => $year,
-                "price" => $price];
+    $properties = [
+      "licensePlate" => $licensePlate,
+      "brand" => $brand,
+      "colour" => $colour,
+      "year" => $year,
+      "price" => $price
+    ];
     return $this->render("CarAdded.twig", $properties);
-  }    
+  }
 
-  public function editCar($licensePlate, $brand, $colour, $year, $price) {
+  public function editCar($licensePlate, $brand, $colour, $year, $price)
+  {
     //$customerName = $map["customerName"];
     //$customerNumber = $map["customerNumber"]; 
-    $CarModel = new CarModel($this->db);     
+    $CarModel = new CarModel($this->db);
     $fetchColours = $CarModel->fetchColours();
     $fetchBrands = $CarModel->fetchBrands();
-    $properties = ["licensePlate" => $licensePlate,
-    "oldBrand" => $brand,
-   "oldColour" => $colour,
- "oldYear" => $year,
-"oldPrice" => $price,
-"colours" => $fetchColours,
-"brands" => $fetchBrands];  
+    $properties = [
+      "licensePlate" => $licensePlate,
+      "oldBrand" => $brand,
+      "oldColour" => $colour,
+      "oldYear" => $year,
+      "oldPrice" => $price,
+      "colours" => $fetchColours,
+      "brands" => $fetchBrands
+    ];
     return $this->render("EditCar.twig", $properties);
   }
-    
-  public function carEdited($licensePlate, $oldBrand, $oldColour, $oldYear, $oldPrice) {
+
+  public function carEdited($licensePlate, $oldBrand, $oldColour, $oldYear, $oldPrice)
+  {
     $form = $this->request->getForm();
     $newBrand = $form["brand"];
     $newColour = $form["colour"];
@@ -53,29 +63,35 @@ class CarController extends AbstractController {
     $newPrice = $form["price"];
     $carModel = new CarModel($this->db);
     $carModel->editCar($licensePlate, $newBrand, $newColour, $newYear, $newPrice);
-    $properties = ["licensePlate" => $licensePlate,
-    "oldBrand" => $oldBrand,
-    "newBrand" => $newBrand,
-   "oldColour" => $oldColour,
- "newColour" => $newColour,
-"oldYear" => $oldYear,
-"newYear" => $newYear,
-"oldPrice" => $oldPrice,
-"newPrice" => $newPrice];
+    $properties = [
+      "licensePlate" => $licensePlate,
+      "oldBrand" => $oldBrand,
+      "newBrand" => $newBrand,
+      "oldColour" => $oldColour,
+      "newColour" => $newColour,
+      "oldYear" => $oldYear,
+      "newYear" => $newYear,
+      "oldPrice" => $oldPrice,
+      "newPrice" => $newPrice
+    ];
     return $this->render("CarEdited.twig", $properties);
-  }    
+  }
 
 
-    
-  public function removeCar($licensePlate, $brand) {
+
+  public function removeCar($licensePlate, $brand)
+  {
     $carModel = new CarModel($this->db);
     $numberOfCars = $carModel->removeCar($licensePlate);
-    $properties = ["licensePlate" => $licensePlate,
-                   "brand" => $brand];
+    $properties = [
+      "licensePlate" => $licensePlate,
+      "brand" => $brand
+    ];
     return $this->render("CarRemoved.twig", $properties);
   }
 
-  public function rentCar() {
+  public function rentCar()
+  {
     $carModel = new CarModel($this->db);
     $fetchCustomers = $carModel->fetchCustomers();
     // $fetchRentedCars = $carModel->fetchRentedCars();
@@ -84,7 +100,8 @@ class CarController extends AbstractController {
     return $this->render("RentCar.twig", $properties);
   }
 
-  public function carRented() {
+  public function carRented()
+  {
     $form = $this->request->getForm();
     $licensePlate = $form["licensePlate"];
     $customerNumber = $form["customerNumber"];
@@ -94,7 +111,8 @@ class CarController extends AbstractController {
     return $this->render("CarRented.twig", $properties);
   }
 
-  public function returnCar() {
+  public function returnCar()
+  {
     $carModel = new CarModel($this->db);
     $fetchRentedCars = $carModel->fetchRentedCars();
     $fetchCars = $carModel->fetchCars();
@@ -102,7 +120,8 @@ class CarController extends AbstractController {
     return $this->render("ReturnCar.twig", $properties);
   }
 
-  public function carReturned() {
+  public function carReturned()
+  {
     $form = $this->request->getForm();
     $licensePlate = $form["licensePlate"];
     $carModel = new CarModel($this->db);
@@ -121,4 +140,3 @@ class CarController extends AbstractController {
 //   return $this->render("AccountAdded.twig", $properties);
 // }
 // }
-

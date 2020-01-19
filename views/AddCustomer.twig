@@ -7,19 +7,113 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 </head>
   <main role="main" class="main">
-    <h1>Add Customer</h1>
-  
-    <form method="post" action="/customerAdded">
-      Name: <input type="text" name="customerName" autofocus="autofocus">
+        <section class="statement">
+        <header>
+          <h2>Renting Done Right. </br> Finally.</h2>
+        </header>
+     
+      </section>
+    <nav region="navigation">
 
-      Social Security Number: <input type="text" name="customerNumber" autofocus="autofocus">
-      Address: <input type="text" name="customerAddress" autofocus="autofocus">
+              <tr><td colspan="3">
+          <form action="/customersMenu" method="post">
+            <input class="btn nav-btn" type="submit" value="Customers">
+          </form> 
+          </td>
+            <td colspan="3">
+          <form action="/carsMenu" method="post">
+            <input class="btn nav-btn" type="submit" value="Cars">
+          </form>  
+          </td>
+            <td colspan="3">
+          <form action="/rentCar" method="post">
+            <input class="btn nav-btn" type="submit" value="Rent Car">
+          </form>  
+          </td>
+            <td colspan="3">
+          <form action="/returnCar" method="post">
+            <input class="btn nav-btn" type="submit" value="Return Car">
+          </form>  
+          </td>
+           <td colspan="3">
+          <form action="/history" method="post">
+            <input class="btn nav-btn" type="submit" value="History">
+          </form>  
+          </td></tr>
 
-    Postal Address: <input type="text" name="postalAddress" autofocus="autofocus">
+    </nav>
+    <div class="mainsection">
+      <section class="form">
+      <form id="addCustomer" method="post" action="">
+      <fieldset>
+        <legend class="formHeader">
+          <h2>Add Customer</h2>
+        </legend>
+      
+        
+          
+            <label>Name:
+            <input type="text" name="customerName" autofocus="autofocus"></label>
+            
+            
+      
+            <label>SSN: 
+            <input id="customerNumber" type="text" name="customerNumber" autofocus="autofocus" maxlength="10" placeholder="YYMMDDXXXX"></label>
+              
+            
+                <label>Address: 
+                <input type="text" name="customerAddress" autofocus="autofocus"></label>
+                
+              
+            <label>Postal Address: 
+            <input id="postalAddress" type="text" name="postalAddress" autofocus="autofocus"></label>
+          
+            <label>Phone Number: 
+            <input id="phoneNumber" type="text" name="phoneNumber" autofocus="autofocus"></label>
+          
+          <input class="btn nav-btn add-btn" type="submit" value="Add customer" onclick="validation()">
+      </fieldset>
+      
+      </form>
+      </section>
+    </div>
+    </main>
+    <script>
 
-    Phone Number: <input type="text" name="phoneNumber" autofocus="autofocus">
-    <input type="submit" value="Ok">
-    </form>
-    
+
+
+
+      
+ function isValid(y,m,d,date) {
+    return date.getYear() == y &&
+    date.getMonth() + 1 == m &&
+    date.getDate() == d;
+};  
+
+
+
+//funktion som validerar mobilnumret, postnumret och personnumret
+
+    function validation() {
+      //lagrar kundens phoneNumber input
+      let phoneNumber = document.getElementById("phoneNumber").value;
+      //lagrar regex för phoneNumber, säger till att första numret måste vara 0, och därefter måste 9 st siffror mellan 0-9 anges
+      let regx = /^[0]\d{9}$/;
+      //lagrar kundens postalAddress input
+      let postalAddress = document.getElementById("postalAddress").value;
+      let regx1 = /^\d{5}/;
+      let customerNumber = document.getElementById("customerNumber").value;
+      let date = new Date(customerNumber.substring(0,2), customerNumber.substring(2,4) - 1, customerNumber.substring(4,6));
+
+      if(regx.test(phoneNumber) && regx1.test(postalAddress) && isValid(customerNumber.substring(0,2), customerNumber.substring(2,4), customerNumber.substring(4,6), date) == true) {
+        document.getElementById("addCustomer").action ="/customerAdded";
+
+      } else {
+        alert("Invalid input. Please note that the postal address must start with 5 numbers, as well the phone number has to start with a 0 and have a maximum length of 10 numbers. Furthermore, the SSN must be correct.");
+      }
+      }
+
+
+    </script>
   </main>
 {% endblock %}
