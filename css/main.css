@@ -83,6 +83,49 @@ nav {
           flex-direction: column;
 }
 
+.mainsection {
+  background-color: #f8f9fa;
+  width: 100%;
+}
+
+.form {
+  margin-left: 31%;
+  width: 37%;
+  background-color: #f8f9fa;
+}
+
+.form > form > fieldset {
+  padding: 0px 50px 50px 50px;
+  border: none;
+}
+
+.form label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.form input {
+  -webkit-box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
+          box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
+  border-radius: 8px;
+  border-color: transparent;
+  padding: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.form .add-btn {
+  padding: 10px;
+}
+
 @media (min-width: 769px) {
   main > section > header > h2 {
     font-size: 42px;

@@ -35,17 +35,10 @@ class CustomerModel extends AbstractModel {
     if (!$customersResult) die($this->db->errorInfo()[2]);
   }
 
-  // function which tells the database to remove an already exisiting row
+  // function which tells the database to remove an already exisiting row as well as updating the values in customerNumber and licensePlate
+  //to NULL in the table Booking before doing so, otherwise the customer won't be able to be deleted as the customerNumber and licensePlate columns
+  //are foreign keys
   public function removeCustomer($customerNumber) {
-    // $carsQuery = "SELECT COUNT(*) FROM Cars WHERE customerNumber = :customerNumber";
-    // $carsStatement = $this->db->prepare($carsQuery);
-    // $carsResult = $carsStatement->execute(["customerNumber" => $customerNumber]);
-    // if (!$carsResult) die($this->db->errorInfo()[2]);
-    // $carsRows = $carsStatement->fetchAll();
-    // $numberOfCars = htmlspecialchars($carsRows[0]["COUNT(*)"]);
-    
-    // if ($numberOfCars == 0) {
-
       $bookingQuery = "UPDATE Booking SET customerNumber = NULL, licensePlate = NULL WHERE customerNumber = :customerNumber";
       $bookingStatement = $this->db->prepare($bookingQuery);
       $bookingResult = $bookingStatement->execute(["customerNumber" => $customerNumber]);
@@ -54,18 +47,7 @@ class CustomerModel extends AbstractModel {
       $customersStatement = $this->db->prepare($customersQuery);
       $customersResult = $customersStatement->execute(["customerNumber" => $customerNumber]);
       if (!$customersResult) die($this->db->errorInfo()[2]);
-    // }
 
-    // return $numberOfCars;
   }  
 
-  
-  public function addAccount($customerNumber) {
-    $accountsQuery = "INSERT INTO Accounts(customerNumber) VALUES(:customerNumber)";
-    $accountsStatement = $this->db->prepare($accountsQuery);
-    $accountsStatement->execute(["customerNumber" => $customerNumber]);
-    if (!$accountsStatement) die($this->db->errorInfo()[2]);
-    $accountNumber = $this->db->lastInsertId();
-    return $accountNumber;
-  }  
 }

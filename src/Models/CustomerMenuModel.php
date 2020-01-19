@@ -6,15 +6,17 @@ use Carrental\Exceptions\DbException;
 use Carrental\Exceptions\NotFoundException;
 use PDO;
 
-class CustomerMenuModel extends AbstractModel {
-  public function customerList() {
+class CustomerMenuModel extends AbstractModel
+{
+  public function customerList()
+  {
     $customerRows = $this->db->query("SELECT * FROM Customers");
     if (!$customerRows) die($this->db->errorInfo());
-      
+
     $customers = [];
     foreach ($customerRows as $customerRow) {
 
-      
+
       $customerNumber = htmlspecialchars($customerRow["customerNumber"]);
       $customerName = htmlspecialchars($customerRow["customerName"]);
       $customerAddress = htmlspecialchars($customerRow["customerAddress"]);
@@ -32,14 +34,15 @@ class CustomerMenuModel extends AbstractModel {
       }
 
       $statusRented = $car["statusRented"] ?? 0;
-      $customer = ["customerNumber" => $customerNumber,
-                   "customerName" => $customerName,
-                  "customerAddress" => $customerAddress,
-                "postalAddress" => $postalAddress,
-              "phoneNumber" => $phoneNumber,
-              "statusRented" => $statusRented
-            ];        
-        
+      $customer = [
+        "customerNumber" => $customerNumber,
+        "customerName" => $customerName,
+        "customerAddress" => $customerAddress,
+        "postalAddress" => $postalAddress,
+        "phoneNumber" => $phoneNumber,
+        "statusRented" => $statusRented
+      ];
+
       $customers[] = $customer;
     }
 
