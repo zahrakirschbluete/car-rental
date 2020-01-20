@@ -89,10 +89,9 @@ class CarModel extends AbstractModel
     if ($carsResult) die($this->db->errorInfo()[2]);
   }
 
-  public function removeCar($licensePlate)
-  {
-
-    $carsQuery = "DELETE FROM Cars WHERE licensePlate = :licensePlate";
+  public function removeCar($licensePlate) {
+    $carsQuery = "DELETE FROM Cars " . 
+    "WHERE licensePlate = :licensePlate";
     $carsStatement = $this->db->prepare($carsQuery);
     $carsResult = $carsStatement->execute(["licensePlate" => $licensePlate]);
     if ($carsResult) die($this->db->errorInfo()[2]);
