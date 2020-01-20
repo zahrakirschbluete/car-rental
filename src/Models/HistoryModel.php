@@ -13,7 +13,8 @@ class HistoryModel extends AbstractModel
     $bookingRows = $this->db->query("SELECT * FROM Booking");
     if (!$bookingRows) die($this->db->errorInfo());
     $bookings = [];
-
+    //loopar igenom bokningsraderna och sätter de i en tom sträng för att sedan kunna använda mig av detta i historik vyn
+    //för att visa varje historikrad och dess resektive information
     foreach ($bookingRows as $bookingRow) {
       $licensePlate = htmlspecialchars($bookingRow["licensePlate"]);
       $customerNumber = htmlspecialchars($bookingRow["customerNumber"]);

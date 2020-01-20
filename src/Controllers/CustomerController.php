@@ -6,6 +6,7 @@ use Carrental\Exceptions\NotFoundException;
 use Carrental\Models\CustomerModel;
 
 class CustomerController extends AbstractController
+//funktion som tar en till twigsidan AddCustomer, där man kan skapa en ny kund
 {
   public function addCustomer()
   {
