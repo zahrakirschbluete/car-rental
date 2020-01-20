@@ -1,102 +1,114 @@
 {% block editCar %}
-<head>
-<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&#038;subset=latin-ext' type='text/css' media='all' />
-<link href="../css/main.css" type="text/css" rel="stylesheet" />
- <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-</head>
+
+	<main region="main" class="main site-content">
+		<section class="statement">
+			<header>
+				<h2>Renting Done Right.
+				</br>
+				Finally.</h2>
+		</header>
+
+	</section>
+	<nav region="navigation">
+
+		<tr>
+			<td colspan="3">
+				<form action="/customersMenu" method="post">
+					<input class="btn nav-btn" type="submit" value="Customers">
+				</form>
+			</td>
+			<td colspan="3">
+				<form action="/carsMenu" method="post">
+					<input class="btn nav-btn" type="submit" value="Cars">
+				</form>
+			</td>
+			<td colspan="3">
+				<form action="/rentCar" method="post">
+					<input class="btn nav-btn" type="submit" value="Rent Car">
+				</form>
+			</td>
+			<td colspan="3">
+				<form action="/returnCar" method="post">
+					<input class="btn nav-btn" type="submit" value="Return Car">
+				</form>
+			</td>
+			<td colspan="3">
+				<form action="/history" method="post">
+					<input class="btn nav-btn" type="submit" value="History">
+				</form>
+			</td>
+		</tr>
+
+	</nav>
+	<div class="mainsection">
+		<section class="form">
+			<legend class="formHeader">
+				<h2>Edit Car</h2>
+			</legend>
+		
+			<form id="editCar" method="post" action="">
+				<label>
+					License plate:
+					<input disabled type="text" name="licensePlate" value="{{licensePlate}}" autofocus="autofocus">
+				</label>
+				<label>
+					Brand:
+					<select name="brand" autofocus="autofocus">
+						{% for brand in brands %}
+							{%if (oldBrand == brand) %}
+			
+								<option selected value={{brand}}>{{brand}}</option>
+							{%else %}
+								<option value={{brand}}>{{brand}}</option>
+								{% endif%}
+							{% endfor %}
+						</select>
+				</label>
+		
+					<label>
+						Colour:
+						<select name="colour" autofocus="autofocus">
+							{% for colour in colours %}
+								{%if (oldColour == colour) %}
+									<option selected value={{colour}}>{{colour}}</option>
+								{%else %}
+									<option value={{colour}}>{{colour}}</option>
+									{% endif%}
+								{% endfor %}
+							</select>
+					</label>
+		
+						<label>
+							Year:
+							<input id="year" type="text" name="year" value="{{oldYear}}" autofocus="autofocus">
+						</label>
+		
+						<label>
+							Price:
+							<input id="price" type="text" name="price" value="{{oldPrice}}" autofocus="autofocus">
+						</label>
+						<input class="btn add-btn" type="submit" value="Edit car" onclick="validation()">
+					</form>
+					<form method="post" action="/carsMenu">
+						<input class="btn add-btn" type="submit" value="Cancel">
+					</form>
+		</section>
+	</div>
+		</main>
+		<script>
+
+			function validation() { // lagrar year input
+let year = document.getElementById("year").value;
+// lagrar price input
+let price = document.getElementById("price").value;
 
 
+if (price > 0 && year > 1900 && year < 2020) {
+document.getElementById("editCar").action = "/carEdited/{{licensePlate}}/{{oldBrand}}/{{oldColour}}/{{oldYear}}/{{oldPrice}}";
 
-  <main region="main" class="main site-content">
-        <section class="statement">
-        <header>
-          <h2>Renting Done Right. </br> Finally.</h2>
-        </header>
-     
-      </section>
-    <nav region="navigation">
-
-              <tr><td colspan="3">
-          <form action="/customersMenu" method="post">
-            <input class="btn nav-btn" type="submit" value="Customers">
-          </form> 
-          </td>
-            <td colspan="3">
-          <form action="/carsMenu" method="post">
-            <input class="btn nav-btn" type="submit" value="Cars">
-          </form>  
-          </td>
-            <td colspan="3">
-          <form action="/rentCar" method="post">
-            <input class="btn nav-btn" type="submit" value="Rent Car">
-          </form>  
-          </td>
-            <td colspan="3">
-          <form action="/returnCar" method="post">
-            <input class="btn nav-btn" type="submit" value="Return Car">
-          </form>  
-          </td>
-           <td colspan="3">
-          <form action="/history" method="post">
-            <input class="btn nav-btn" type="submit" value="History">
-          </form>  
-          </td></tr>
-
-    </nav>
-  <h2>Edit Car</h2>
-
-  <form id="editCar" method="post" action="">
-    License plate: <input disabled type="text" name="licensePlate"
-           value="{{licensePlate}}" autofocus="autofocus">
-      Brand: <select name="brand" autofocus="autofocus">
-   {% for brand in brands %}
-   {%if (oldBrand == brand) %}
-   
-      <option selected value={{brand}}>{{brand}}</option>
-      {%else %}
-      <option value={{brand}}>{{brand}}</option>
-      {% endif%}
-      {% endfor %}
-      </select>
-      
-      Colour: <select name="colour" autofocus="autofocus">
-   {% for colour in colours %}
-   {%if (oldColour == colour) %}
-      <option selected value={{colour}}>{{colour}}</option>
-      {%else %}
-      <option value={{colour}}>{{colour}}</option>
-      {% endif%}
-      {% endfor %}
-      </select>
-
-    Year: <input id="year" type="text" name="year"
-           value="{{oldYear}}" autofocus="autofocus">
-
-    Price: <input id="price" type="text" name="price"
-           value="{{oldPrice}}" autofocus="autofocus">
-    <input type="submit" value="Edit car" onclick="validation()">
-  </form>
-    <form method="post" action="/carsMenu">
-    <input type="submit" value="Cancel">
-  </form>
-  </main>
-          <script>
-
-    function validation() {
-      //lagrar year input
-      let year = document.getElementById("year").value;
-      //lagrar price input
-      let price = document.getElementById("price").value;
-
-      
-      if(price > 0 && year > 1900 && year < 2020) {
-        document.getElementById("editCar").action = "/carEdited/{{licensePlate}}/{{oldBrand}}/{{oldColour}}/{{oldYear}}/{{oldPrice}}";
-
-      } else {
-        alert("Invalid input. Please note that the price cannot be negative and the year must be between 1900-2019.");
-      }
-      }
-      </script>
-{% endblock %}
+} else {
+alert("Invalid input. Please note that the price cannot be negative and the year must be between 1900-2019.");
+}
+}
+		</script>
+	{% endblock %}

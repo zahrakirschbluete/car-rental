@@ -60,6 +60,13 @@ main > section > p {
   margin-right: 10px;
 }
 
+.add-item-btn {
+  padding: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-left: 90%;
+}
+
 nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -81,6 +88,16 @@ nav {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+table {
+  text-align: left;
+  border-spacing: 0 10px;
+}
+
+td {
+  background-color: #e4e4e4;
+  padding: 2px;
 }
 
 .mainsection {
@@ -112,7 +129,7 @@ nav {
   font-weight: bold;
 }
 
-.form input {
+.form input, .form select {
   -webkit-box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
           box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
   border-radius: 8px;
@@ -124,6 +141,7 @@ nav {
 
 .form .add-btn {
   padding: 10px;
+  margin-top: 5px;
 }
 
 @media (min-width: 769px) {

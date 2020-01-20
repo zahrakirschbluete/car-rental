@@ -64,7 +64,14 @@
         margin-right: 10px;
       }
 
+      .add-item-btn {
+        padding: 8px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-left: 90%;
+      }
 
+      
       
       nav {
           display: flex;
@@ -80,6 +87,15 @@
         
     }
 
+    table {
+        text-align: left;
+        border-spacing: 0 10px;
+    }
+    
+    td {
+        background-color: #e4e4e4;
+        padding: 2px;
+    }
 .mainsection {
     background-color: #f8f9fa;
     width: 100%;
@@ -102,7 +118,7 @@
               text-transform: uppercase;
               font-weight: bold;
           }
-          input {
+          input, select {
             box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
             border-radius: 8px;
             border-color: transparent;
@@ -113,6 +129,7 @@
 
           .add-btn {
               padding: 10px;
+              margin-top: 5px;
           }
     }
   

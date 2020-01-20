@@ -1,13 +1,4 @@
 {% block rentCar %}
-<head>
-<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&#038;subset=latin-ext' type='text/css' media='all' />
-<link href="../css/main.css" type="text/css" rel="stylesheet" />
- <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-</head>
-
-
 
   <main region="main" class="main site-content">
         <section class="statement">
@@ -45,38 +36,47 @@
           </td></tr>
 
     </nav>
-  <h2>Rent Car</h2>
-
-  <form method="post" action="/carRented">
-      Customer: <select name="customerNumber" autofocus="autofocus">
-   {% for customer in customers %}
-   
-     <option hidden disabled selected value>
-     -- Select customer --</option>
-      <option value={{customer.customerNumber}}>{{customer.customerNumber}} {{customer.customerName}}</option>
-      {% endfor %}
-      </select>
-      
-      Car: <select name="licensePlate" autofocus="autofocus">
-      <option hidden disabled selected value>
-     -- Select car --</option>
-     
-   {% for car in cars %}
-   {# {% for rentedCar in rentedCars %} #}
-   {# {% if rentedCar.start %} #}
-     
-      <option value={{car.licensePlate}}>{{car.licensePlate}}</option>
-      
-      {# {% endif %}
-{% endfor %} #}
-      {% endfor %}
-      
-      </select>
-      <input type="submit" value="Rent Car">
-  </form>
-      <form method="post" action="/carsMenu">
-    <input type="submit" value="Cancel">
-  </form>
-    </form>
+  <div class="mainsection">
+    <section class="form">
+      <legend class="formHeader">
+        <h2>Rent Car</h2>
+      </legend>
+    
+      <form method="post" action="/carRented">
+          <label>Customer: <select name="customerNumber" autofocus="autofocus"></label>
+       {% for customer in customers %}
+       
+         <label for="">
+           <option hidden disabled selected value>
+           -- Select customer --</option>
+            <option value={{customer.customerNumber}}>{{customer.customerNumber}} {{customer.customerName}}</option>
+            {% endfor %}
+            </select>
+         </label>
+          
+          <label>
+            Car: <select name="licensePlate" autofocus="autofocus">
+            <option hidden disabled selected value>
+           -- Select car --</option>
+           
+         {% for car in cars %}
+         {# {% for rentedCar in rentedCars %} #}
+         {# {% if rentedCar.start %} #}
+           
+            <option value={{car.licensePlate}}>{{car.licensePlate}}</option>
+            
+            {# {% endif %}
+      {% endfor %} #}
+          </label>
+          {% endfor %}
+          
+          </select>
+          <input class="btn add-btn" type="submit" value="Rent Car" style="width: 20%">
+          <form method="post" action="/carsMenu">
+        <input type="submit" class="btn add-btn" value="Cancel" style="width: 20%">
+      </form>
+        </form>
+    </section>
+  </div>
 </main>
 {% endblock %}
