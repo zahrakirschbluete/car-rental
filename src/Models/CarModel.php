@@ -75,7 +75,7 @@ class CarModel extends AbstractModel
 
   public function editCar($licensePlate, $newBrand, $newColour, $newYear, $newPrice)
   {
-    $carsQuery = "UPDATE Cars SET brand = :brand, colour = :colour, year = :year, price = :price, statusRented = 0, start = NULL " .
+    $carsQuery = "UPDATE Cars SET brand = :brand, colour = :colour, year = :year, price = :price " . 
       "WHERE licensePlate = :licensePlate";
     $carsStatement = $this->db->prepare($carsQuery);
     $carsParameters = [
@@ -89,10 +89,9 @@ class CarModel extends AbstractModel
     if ($carsResult) die($this->db->errorInfo()[2]);
   }
 
-  public function removeCar($licensePlate)
-  {
-
-    $carsQuery = "DELETE FROM Cars WHERE licensePlate = :licensePlate";
+  public function removeCar($licensePlate) {
+    $carsQuery = "DELETE FROM Cars " . 
+    "WHERE licensePlate = :licensePlate";
     $carsStatement = $this->db->prepare($carsQuery);
     $carsResult = $carsStatement->execute(["licensePlate" => $licensePlate]);
     if ($carsResult) die($this->db->errorInfo()[2]);

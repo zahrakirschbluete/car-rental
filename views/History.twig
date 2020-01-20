@@ -61,6 +61,7 @@
     <th><b>Total cost</b></th>
     </tr>
  </thead>
+ {% set totalCost = 0 %}
  {% for booking in bookings %}
         <tr>
               <td><b>{{booking.licensePlate}}</b></td>
@@ -70,9 +71,13 @@
               <td><b>{{booking.days}}</b></td>
               <td><b>{{booking.cost}}</b></td>
           <tr>
-
+        {% set totalCost = totalCost + booking.cost %}
       {% endfor %}
+      
+        
 
 </table>
-
+<table style="width: 100%;"><thead><th>Total cost</th></thead>
+<tbody><tr><td><b>{{totalCost}}</b></td></tr></tbody>
+</table>
         {% endblock %}

@@ -71,17 +71,15 @@ class CustomerController extends AbstractController
       "oldPhoneNumber" => $oldPhoneNumber,
       "newPhoneNumber" => $newPhoneNumber
     ];
+    var_dump($form);
+    var_dump($properties);
     return $this->render("CustomerEdited.twig", $properties);
   }
 
-  //function which shares information to the CustomerModel, which will in turn remove the selected customer data from the database
-  public function removeCustomer($customerNumber, $customerName)
-  {
+  public function removeCustomer($customerNumber) {
     $customerModel = new CustomerModel($this->db);
-    $properties = [
-      "customerNumber" => $customerNumber,
-      "customerName" => $customerName
-    ];
+    $customerModel = $customerModel->removeCustomer($customerNumber);
+    $properties = ["customerNumber" => $customerNumber];
     return $this->render("CustomerRemoved.twig", $properties);
   }
 }
