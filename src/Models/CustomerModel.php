@@ -35,15 +35,15 @@ class CustomerModel extends AbstractModel {
     if (!$customersResult) die($this->db->errorInfo()[2]);
   }
 
-  // function which tells the database to remove an already exisiting row as well as updating the values in customerNumber and licensePlate
-  //to NULL in the table Booking before doing so, otherwise the customer won't be able to be deleted as the customerNumber and licensePlate columns
-  //are foreign keys
   public function removeCustomer($customerNumber) {
-      $bookingQuery = "UPDATE Booking SET customerNumber = NULL, licensePlate = NULL WHERE customerNumber = :customerNumber";
+      $bookingQuery = "UPDATE Booking SET customerNumber = NULL, licensePlate = NULL " . 
+      "WHERE customerNumber = :customerNumber";
       $bookingStatement = $this->db->prepare($bookingQuery);
       $bookingResult = $bookingStatement->execute(["customerNumber" => $customerNumber]);
-      
-      $customersQuery = "DELETE FROM Customers WHERE customerNumber = :customerNumber";
+      if (!$bookingResult) die($this->db->errorInfo()[2]);
+
+      $customersQuery = "DELETE FROM Customers " . 
+      "WHERE customerNumber = :customerNumber";
       $customersStatement = $this->db->prepare($customersQuery);
       $customersResult = $customersStatement->execute(["customerNumber" => $customerNumber]);
       if (!$customersResult) die($this->db->errorInfo()[2]);

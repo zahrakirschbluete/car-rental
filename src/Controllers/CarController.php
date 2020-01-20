@@ -44,12 +44,12 @@ class CarController extends AbstractController
     $fetchBrands = $CarModel->fetchBrands();
     $properties = [
       "licensePlate" => $licensePlate,
-      "oldBrand" => $brand,
-      "oldColour" => $colour,
-      "oldYear" => $year,
-      "oldPrice" => $price,
+      "brands" => $fetchBrands,
       "colours" => $fetchColours,
-      "brands" => $fetchBrands
+      "brand" => $brand,
+      "colour" => $colour,
+      "year" => $year,
+      "price" => $price
     ];
     return $this->render("EditCar.twig", $properties);
   }
@@ -57,8 +57,8 @@ class CarController extends AbstractController
   public function carEdited($licensePlate, $oldBrand, $oldColour, $oldYear, $oldPrice)
   {
     $form = $this->request->getForm();
-    $newBrand = $form["brand"];
-    $newColour = $form["colour"];
+    $newBrand = $form["brand"] ?? $oldBrand;
+    $newColour = $form["colour"] ?? $oldColour;
     $newYear = $form["year"];
     $newPrice = $form["price"];
     $carModel = new CarModel($this->db);
@@ -74,6 +74,8 @@ class CarController extends AbstractController
       "oldPrice" => $oldPrice,
       "newPrice" => $newPrice
     ];
+    var_dump($properties);
+    var_dump($form);
     return $this->render("CarEdited.twig", $properties);
   }
 
