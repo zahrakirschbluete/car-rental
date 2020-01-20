@@ -1,11 +1,5 @@
 {% block editCustomer %}
-<head>
-<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&#038;subset=latin-ext' type='text/css' media='all' />
-<link href="../css/main.css" type="text/css" rel="stylesheet" />
- <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-</head>
+
 
 
 
@@ -45,27 +39,43 @@
           </td></tr>
 
     </nav>
-  <h2>Edit Customer</h2>
-
-  <form id="editCustomer" method="post" action="">
-Social security number: <input disabled type="text" name="customerNumber"
-           value="{{customerNumber}}" autofocus="autofocus">
-    Name: <input type="text" name="customerName"
-           value="{{customerName}}" autofocus="autofocus">
-
-    Address: <input type="text" name="customerAddress"
-           value="{{customerAddress}}" autofocus="autofocus">
-
-    Postal Address: <input id="postalAddress" type="text" name="postalAddress"
-           value="{{postalAddress}}" autofocus="autofocus">
-
-    Phone Number: <input id="phoneNumber" type="text" name="phoneNumber"
-           value="{{phoneNumber}}" autofocus="autofocus">
-    <input type="submit" value="Edit customer" onclick="validation()">
-  </form>
-    <form method="post" action="/customersMenu">
-    <input type="submit" value="Cancel">
-  </form>
+  <div class="mainsection">
+    <section class="form">
+      <legend class="formHeader">
+        <h2>Edit Customer</h2>
+      </legend>
+    
+      <form id="editCustomer" method="post" action="">
+    <label for="">
+      Social security number: <input disabled type="text" name="customerNumber"
+                 value="{{customerNumber}}" autofocus="autofocus">
+    </label>
+        <label>
+          Name: <input type="text" name="customerName"
+                 value="{{customerName}}" autofocus="autofocus">
+        </label>
+    
+        <label>
+          Address: <input type="text" name="customerAddress"
+                 value="{{customerAddress}}" autofocus="autofocus">
+        </label>
+    
+        <label>
+          Postal Address: <input id="postalAddress" type="text" name="postalAddress"
+                 value="{{postalAddress}}" autofocus="autofocus">
+        </label>
+    
+        <label>
+          Phone Number: <input id="phoneNumber" type="text" name="phoneNumber"
+                 value="{{phoneNumber}}" autofocus="autofocus">
+        </label>
+        <input class="btn add-btn" type="submit" value="Edit customer" onclick="validation()">
+      </form>
+        <form method="post" action="/customersMenu">
+        <input class="btn add-btn" type="submit" value="Cancel">
+      </form>
+    </section>
+  </div>
   </main>
       <script>
 

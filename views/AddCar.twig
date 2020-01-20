@@ -1,11 +1,4 @@
 {% block addCar %}
-<head>
-<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&#038;subset=latin-ext' type='text/css' media='all' />
-<link href="../css/main.css" type="text/css" rel="stylesheet" />
- <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-</head>
   <main role="main" class="main">
         <section class="statement">
         <header>
@@ -42,29 +35,40 @@
           </td></tr>
 
     </nav>
-    <h2>Add Car</h2>
-  
-    <form id="addCar" method="post" action="">
-      License plate: <input id="licensePlate" type="text" name="licensePlate" autofocus="autofocus" maxlength="6">
-
-      Brand: <select name="brand" autofocus="autofocus">
-   {% for brand in brands %}
-      <option value={{brand}}>{{brand}}</option>
-      {% endfor %}
-      </select>
+    <div class="mainsection">
+      <section class="form">
+        
       
-      Colour: <select name="colour" autofocus="autofocus">
-   {% for colour in colours %}
-      <option value={{colour}}>{{colour}}</option>
-      {% endfor %}
-      </select>
-
-    Year: <input id="year" type="text" name="year" autofocus="autofocus">
-
-    Price: <input id="price" type="text" name="price" autofocus="autofocus">
-    <input type="submit" value="Ok" onclick="validation()">
-    </form>
+        <form id="addCar" method="post" action="">
+         <legend class="formHeader">
+        <h2>Add Car</h2>
+      </legend>
+          <label>License plate: <input id="licensePlate" type="text" name="licensePlate" autofocus="autofocus" maxlength="6"></label>
+     
+          <label>
+            Brand: <select name="brand" autofocus="autofocus">
+         {% for brand in brands %}
+            <option value={{brand}}>{{brand}}</option>
+            {% endfor %}
+            </select>
+          </label>
+          
+          <label>
+            Colour: <select name="colour" autofocus="autofocus">
+         {% for colour in colours %}
+            <option value={{colour}}>{{colour}}</option>
+            {% endfor %}
+            </select>
+          </label>
     
+        <label>Year: <input id="year" type="text" name="year" autofocus="autofocus"></label>
+    
+        <label>Price: <input id="price" type="text" name="price" autofocus="autofocus"></label>
+        <input class="btn nav-btn add-btn" type="submit" value="Ok" onclick="validation()">
+        </form>
+      </section>
+      
+    </div>
   </main>
         <script>
 
