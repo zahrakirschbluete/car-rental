@@ -78,6 +78,7 @@ class CustomerController extends AbstractController
   public function removeCustomer($customerNumber, $customerName)
   {
     $customerModel = new CustomerModel($this->db);
+    $customerModel->removeCustomer($customerNumber);
     $properties = [
       "customerNumber" => $customerNumber,
       "customerName" => $customerName
