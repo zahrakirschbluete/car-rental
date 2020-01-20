@@ -75,7 +75,7 @@ class CarModel extends AbstractModel
 
   public function editCar($licensePlate, $newBrand, $newColour, $newYear, $newPrice)
   {
-    $carsQuery = "UPDATE Cars SET brand = :brand, colour = :colour, year = :year, price = :price " . 
+    $carsQuery = "UPDATE Cars SET brand = :brand, colour = :colour, year = :year, price = :price " .
       "WHERE licensePlate = :licensePlate";
     $carsStatement = $this->db->prepare($carsQuery);
     $carsParameters = [
