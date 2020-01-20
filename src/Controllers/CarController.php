@@ -37,8 +37,6 @@ class CarController extends AbstractController
 
   public function editCar($licensePlate, $brand, $colour, $year, $price)
   {
-    //$customerName = $map["customerName"];
-    //$customerNumber = $map["customerNumber"]; 
     $CarModel = new CarModel($this->db);
     $fetchColours = $CarModel->fetchColours();
     $fetchBrands = $CarModel->fetchBrands();
@@ -131,12 +129,3 @@ class CarController extends AbstractController
   }
 }
 
-// public function addAccount($customerNumber, $customerName) {
-//   $customerModel = new CustomerModel($this->db);
-//   $accountNumber = $customerModel->addAccount($customerNumber);
-//   $properties = ["customerNumber" => $customerNumber,
-//                  "customerName" => $customerName,
-//                  "accountNumber" => $accountNumber];
-//   return $this->render("AccountAdded.twig", $properties);
-// }
-// }

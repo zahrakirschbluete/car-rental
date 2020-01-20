@@ -14,6 +14,8 @@ class CustomerMenuModel extends AbstractModel
     if (!$customerRows) die($this->db->errorInfo());
 
     $customers = [];
+    //loopar igenom alla kundrader i tabellen Customers och sätter dom i en tom sträng för att sedan kunna använda mig av detta i vyn
+    // och visa samtliga kunder och deras respektive information
     foreach ($customerRows as $customerRow) {
 
 
