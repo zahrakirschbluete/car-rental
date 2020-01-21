@@ -1,5 +1,5 @@
 {% block carRemoved %}
-
+ <main region="main" class="main site-content">
       <section class="statement">
         <header>
           <h2>Renting Done Right. </br> Finally.</h2>
@@ -37,7 +37,7 @@
     </nav>
 
 
-  <main region="main" class="main site-content">
+ 
   <h2>Car Removed</h2>
 
 {% if statusRented == 0 %}
@@ -49,7 +49,7 @@
 {% endif %}
   
   <form method="post" action="/carsMenu">
-    <input type="submit" value="Ok">
+    <input class="btn add-item-btn" type="submit" value="Ok">
   </form>
   </main>
 {% endblock %}

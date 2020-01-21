@@ -72,8 +72,6 @@ class CarController extends AbstractController
       "oldPrice" => $oldPrice,
       "newPrice" => $newPrice
     ];
-    var_dump($properties);
-    var_dump($form);
     return $this->render("CarEdited.twig", $properties);
   }
 
