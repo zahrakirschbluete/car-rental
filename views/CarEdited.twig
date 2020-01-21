@@ -1,6 +1,6 @@
 {% block carEdited %}
 
-
+ <main region="main" class="main site-content">
       <section class="statement">
         <header>
           <h2>Renting Done Right. </br> Finally.</h2>
@@ -37,14 +37,14 @@
 
     </nav>
 
-  <main region="main" class="main site-content">
+ 
   <h2>Car Edited</h2>
 
   <p>The information regarding the car with the license plate number {{licensePlate}}
      has been successfully updated.</p>
 
   <form method="post" action="/carsMenu">
-    <input type="submit" value="Ok">
+    <input class="btn add-item-btn" type="submit" value="Ok">
   </form>
   </main>
 {% endblock %}

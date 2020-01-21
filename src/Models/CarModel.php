@@ -86,7 +86,7 @@ class CarModel extends AbstractModel
       "price" => $newPrice
     ];
     $carsResult = $carsStatement->execute($carsParameters);
-    if ($carsResult) die($this->db->errorInfo()[2]);
+
   }
 
   public function removeCar($licensePlate) {
@@ -94,7 +94,7 @@ class CarModel extends AbstractModel
     "WHERE licensePlate = :licensePlate";
     $carsStatement = $this->db->prepare($carsQuery);
     $carsResult = $carsStatement->execute(["licensePlate" => $licensePlate]);
-    if ($carsResult) die($this->db->errorInfo()[2]);
+
   }
 
   public function rentCar($customerNumber, $licensePlate)
