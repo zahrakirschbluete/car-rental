@@ -1,156 +1,175 @@
+$primary-color: #363158;
 
-
-    body {
-        min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-          padding: 0px;
-        margin: 0px;
-        box-sizing: border-box;
-        font-family: "Source Sans Pro";
-        height: 100%;
-
-      
-      }
-    
-      .hidden {
-          display: none;
-      }
-  
-      .btn:hover {
-        cursor: pointer;
-        background-color: #3E1F60;
-  
-      }
-      
-
-  
-      .column {
-        width: 20mm;
-      }
-  
-    
-      img {
-          width: 100%;
-          height: auto;
-          max-width: 520px;
-      }
-  
-      .main {
-        padding: 20px;
-        
-  
-      }
-  
-      main > section > header > h2 {
-        font-size: 42px;
-      }
-      main > section > p {
-        font-size: 24px;
-      }
-  
-      .btn {
-        padding: 20px;
-        border-radius: 5%;
-        color: white;
-        background-color: #6934A3;
-        border: none;
-        
-      }
-
-      .nav-btn {
-        font-size: 17px; 
-        margin-bottom: 10px;
-        margin-right: 10px;
-      }
-
-      .add-item-btn {
-        padding: 8px;
-        text-transform: uppercase;
-        font-weight: bold;
-        margin-left: 90%;
-      }
-
-      
-      
-      nav {
-          display: flex;
-          flex-flow: row wrap;
-          
-
-      }
-  
-      .statement {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        
-    }
-
-    table {
-        text-align: left;
-        border-spacing: 0 10px;
-    }
-    
-    td {
-        background-color: #e4e4e4;
-        padding: 2px;
-    }
-.mainsection {
-    background-color: #f8f9fa;
-    width: 100%;
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Source Sans Pro";
+  height: 100%;
 }
-    .form {
-        margin-left: 31%;
-        width: 37%;
-        background-color: #f8f9fa;
 
+.hidden {
+  display: none;
+}
 
-        > form > fieldset {
-            padding: 0px 50px 50px 50px;
-            border: none;
-            
-          }
-          label {
-              display: flex;
-              flex-flow: column nowrap;
-              margin-bottom: 5px;
-              text-transform: uppercase;
-              font-weight: bold;
-          }
-          input, select {
-            box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
-            border-radius: 8px;
-            border-color: transparent;
-            padding: 4px;
-            text-transform: uppercase;
-            font-weight: bold;
-          }
+// .btn:hover {
+//   cursor: pointer;
+//   background-color: rgb(108, 98, 179);
+// }
 
-          .add-btn {
-              padding: 10px;
-              margin-top: 5px;
-          }
-    }
-  
-  @media (min-width: 769px) {
+.column {
+  width: 20mm;
+}
 
-    main > section > header > h2 {
-        font-size: 42px;
-      }
-      .nav-btn {
-          font-size: 12px;
-      }
+img {
+  width: 100%;
+  height: auto;
+  max-width: 520px;
+}
 
-      .main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+.main {
+  padding: 20px;
+}
 
-      .statement {
-          flex-direction: row;
-          
-      }
+.padding-20vh {
+  padding: 0vh 20vh 0px 20vh;
+}
 
+main > section > header > h2 {
+  font-size: 42px;
+}
+
+main > section > p {
+  font-size: 24px;
+}
+
+.nav-bg {
+  background-color: $primary-color;
+}
+
+.btn-custom {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: white;
+
+  &:hover {
+    background: darken($primary-color, 5%);
+    color: white;
   }
+}
+// .btn {
+//   padding: 20px;
+//   border-radius: 5%;
+//   color: white;
+//   background-color: #877be1;
+//   border: none;
+// }
+
+// .btn:disabled {
+//   background-color: rgb(168, 160, 228);
+//   cursor: not-allowed;
+// }
+
+// .nav-btn {
+//   font-size: 17px;
+//   margin-bottom: 10px;
+//   margin-right: 10px;
+// }
+
+// .add-item-btn {
+//   padding: 8px;
+//   text-transform: uppercase;
+//   text-decoration: none;
+//   margin-left: 90%;
+// }
+
+// .btn-sm {
+//   padding: 0.1rem 0.2rem;
+//   font-size: 0.875rem;
+//   line-height: 1.5;
+//   border-radius: 0.2rem;
+// }
+
+// tbody tr:nth-child(odd) {
+//   background-color: rgba(0, 0, 0, 0.05);
+// }
+
+// nav {
+//   display: flex;
+//   flex-flow: row wrap;
+// }
+
+// .statement {
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+// }
+
+// table {
+//   text-align: left;
+//   border-spacing: 0 10px;
+// }
+
+// td {
+//   padding: 2px;
+// }
+
+.mainsection {
+  width: 100%;
+}
+
+.form {
+  margin-left: 31%;
+  width: 37%;
+
+  > form > fieldset {
+    padding: 0px 50px 50px 50px;
+    border: none;
+  }
+
+  label {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  input,
+  select {
+    box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
+    border-radius: 8px;
+    border-color: transparent;
+    padding: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  // .add-btn {
+  //   padding: 10px;
+  //   margin-top: 5px;
+  // }
+}
+
+@media (min-width: 769px) {
+  main > section > header > h2 {
+    font-size: 42px;
+  }
+
+  // .nav-btn {
+  //   font-size: 12px;
+  // }
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .statement {
+    flex-direction: row;
+  }
+}

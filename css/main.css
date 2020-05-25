@@ -19,11 +19,6 @@ body {
   display: none;
 }
 
-.btn:hover {
-  cursor: pointer;
-  background-color: #3E1F60;
-}
-
 .column {
   width: 20mm;
 }
@@ -38,6 +33,10 @@ img {
   padding: 20px;
 }
 
+.padding-20vh {
+  padding: 0vh 20vh 0px 20vh;
+}
+
 main > section > header > h2 {
   font-size: 42px;
 }
@@ -46,69 +45,28 @@ main > section > p {
   font-size: 24px;
 }
 
-.btn {
-  padding: 20px;
-  border-radius: 5%;
+.nav-bg {
+  background-color: #363158;
+}
+
+.btn-custom {
+  background-color: #363158;
+  border-color: #363158;
   color: white;
-  background-color: #6934A3;
-  border: none;
 }
 
-.nav-btn {
-  font-size: 17px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-}
-
-.add-item-btn {
-  padding: 8px;
-  text-transform: uppercase;
-  font-weight: bold;
-  margin-left: 90%;
-}
-
-nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-}
-
-.statement {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-table {
-  text-align: left;
-  border-spacing: 0 10px;
-}
-
-td {
-  background-color: #e4e4e4;
-  padding: 2px;
+.btn-custom:hover {
+  background: #2c2848;
+  color: white;
 }
 
 .mainsection {
-  background-color: #f8f9fa;
   width: 100%;
 }
 
 .form {
   margin-left: 31%;
   width: 37%;
-  background-color: #f8f9fa;
 }
 
 .form > form > fieldset {
@@ -129,7 +87,8 @@ td {
   font-weight: bold;
 }
 
-.form input, .form select {
+.form input,
+.form select {
   -webkit-box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
           box-shadow: 0 0 8px rgba(32, 32, 32, 0.185);
   border-radius: 8px;
@@ -139,17 +98,9 @@ td {
   font-weight: bold;
 }
 
-.form .add-btn {
-  padding: 10px;
-  margin-top: 5px;
-}
-
 @media (min-width: 769px) {
   main > section > header > h2 {
     font-size: 42px;
-  }
-  .nav-btn {
-    font-size: 12px;
   }
   .main {
     display: -webkit-box;
