@@ -1,118 +1,131 @@
 {% block carsMenu %}
 
-<main region="main" class="main site-content">
- 
-      <section class="statement">
-        <header>
-          <h2>Renting Done Right. </br> Finally.</h2>
-        </header>
-     
-      </section>
-    <nav region="navigation">
+			<header class="text-center m-5">
+					<h2 class=" font-weight-bold">Renting Done Right.
+					</br>
+					Finally.</h2>
+			</header>
 
-              <tr><td colspan="3">
-          <form action="/customersMenu" method="post">
-            <input class="btn nav-btn" type="submit" value="Customers">
-          </form> 
-          </td>
-            <td colspan="3">
-          <form action="/carsMenu" method="post">
-            <input class="btn nav-btn" type="submit" value="Cars">
-          </form>  
-          </td>
-            <td colspan="3">
-          <form action="/rentCar" method="post">
-            <input class="btn nav-btn" type="submit" value="Rent Car">
-          </form>  
-          </td>
-            <td colspan="3">
-          <form action="/returnCar" method="post">
-            <input class="btn nav-btn" type="submit" value="Return Car">
-          </form>  
-          </td>
-           <td colspan="3">
-          <form action="/history" method="post">
-            <input class="btn nav-btn" type="submit" value="History">
-          </form>  
-          </td></tr>
 
-    </nav>
-        </main>
-       <tr><td>
-          <form action="/addCar" method="post">
-            <input class="btn add-item-btn"  type="submit" value="Add car">
-          </form>  
-          </td>
-          </tr>
-    
-  <table id="cars">
-   <thead>
- <tr>
-  <th><b>License Plate</b></td>
-    <th><b>Brand</b></th>
-    <th><b>Colour</b></th>
-    <th><b>Year</b></th>
-    <th><b>Price</b></th>
-    <th><b>Rented by</b></th>
-    <th><b>Rental Date</b></th>
-    </tr>
- </thead>
-  {% for car in cars %}
 
-        <tr>
-              <td><b>{{car.licensePlate}}</b></td>
-              <td><b>{{car.brand}}</b></td>
-              <td><b>{{car.colour}}</b></td>
-              <td><b>{{car.year}}</b></td>
-              <td><b>{{car.price}}</b></td>
-              {% if car.customerNumber == "" %}
-              <td><b>Available</b></td>
-              {% else %}
-              <td><b>{{car.customerNumber}}</b></td>
-
-              {% endif %}
-              {% if car.start %}
-              <td><b>{{car.start}}</b></td>
-              {% else %}
-              <td><b>&nbsp;</b></td>
-              {% endif %}
-
+<nav class="navbar navbar-expand-lg navbar-dark nav-bg " >
   
-          
-           {% if car.statusRented == 0 %}
-          <td>
-            <form method="post" action="/editCar/{{car.licensePlate}}/{{car.brand}}/{{car.colour}}/{{car.year}}/{{car.price}}">
-              <input type="submit" style="width:100%" value="Edit">
-            </form>
-          </td>
-  
-          <td>
-            <form method="post" action="/removeCar/{{car.licensePlate}}/{{car.brand}}"
-                  onsubmit="return confirm('Are you sure you want to remove the car {{car.brand}} {{car.brand}} with the license plate number {{car.licensePlate}}?')">
-              <input type="submit" style="width:100%" value="Remove">
-            </form>
-          </td>
-          
-          {% else %}
-            <td>
-            <form method="post" action="/editCar/{{car.licensePlate}}/{{car.brand}}/{{car.colour}}/{{car.year}}/{{car.price}}">
-              <input disabled type="submit" style="width:100%" value="Edit">
-            </form>
-          </td>
-  
-          <td>
-            <form method="post" action="/removeCar/{{car.licensePlate}}/{{car.brand}}"
-                  onsubmit="return confirm('Are you sure you want to remove the car {{car.brand}} with the license plate number {{car.licensePlate}}?')">
-              <input disabled type="submit" style="width:100%" value="Remove">
-            </form>
-          </td>
-          
-          {% endif %}
-          </tr>
-      {% endfor %}
-    </table>
-    
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <ul class="navbar-nav mx-auto font-weight-bold">
+      <li class="nav-item">
+        <a class="nav-link" href="/customersMenu">Customers</a>
+      </li>
+      <li class="nav-item  active">
+        <a class="nav-link" href="/carsMenu">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/rentCar">Rent Car</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/returnCar">Return Car</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="/history">History</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main region="main" class="container">
+<div>
+	<a href="/addCar" class="btn btn-custom mt-5 float-right">Add car</a>
+</div>
 
 
+<table id="cars" class=" table table-responsive-sm table-striped">
+	<thead>
+	
+			<th>
+				<b>License Plate</b>
+			</th>
+	
 
-{% endblock %}
+<th scope="col">
+	<b>Brand</b>
+</th>
+<th scope="col">
+	<b>Colour</b>
+</th>
+<th scope="col">
+	<b>Year</b>
+</th>
+<th scope="col">
+	<b>Price</b>
+</th>
+<th scope="col">
+	<b>Rented by</b>
+</th>
+<th scope="col">
+	<b>Rental Date</b>
+</th></tr></thead>{% for car in cars %}<tr>
+<td>
+	<b>{{car.licensePlate}}</b>
+</td>
+<td>
+	<b>{{car.brand}}</b>
+</td>
+<td>
+	<b>{{car.colour}}</b>
+</td>
+<td>
+	<b>{{car.year}}</b>
+</td>
+<td>
+	<b>{{car.price}}</b>
+</td>
+{% if car.customerNumber == "" %}
+	<td>
+		<b>Available</b>
+	</td>
+{% else %}
+	<td>
+		<b>{{car.customerNumber}}</b>
+	</td>
+
+{% endif %}
+{% if car.start %}
+	<td>
+		<b>{{car.start}}</b>
+	</td>
+{% else %}
+	<td>
+		<b>&nbsp;</b>
+	</td>
+{% endif %}
+
+
+{% if car.statusRented == 0 %}
+	<td>
+		<form method="post" action="/editCar/{{car.licensePlate}}/{{car.brand}}/{{car.colour}}/{{car.year}}/{{car.price}}">
+			<input class="btn btn-custom" type="submit" value="Edit">
+		</form>
+	</td>
+
+	<td>
+		<form method="post" action="/removeCar/{{car.licensePlate}}/{{car.brand}}" onsubmit="return confirm('Are you sure you want to remove the car {{car.brand}} {{car.brand}} with the license plate number {{car.licensePlate}}?')">
+			<input class="btn btn-sm" type="submit" style="width:100%" value="Remove">
+		</form>
+	</td>
+
+{% else %}
+	<td>
+		<form method="post" action="/editCar/{{car.licensePlate}}/{{car.brand}}/{{car.colour}}/{{car.year}}/{{car.price}}">
+			<input disabled class="btn btn-custom" type="submit" value="Edit">
+		</form>
+	</td>
+
+	<td>
+		<form method="post" action="/removeCar/{{car.licensePlate}}/{{car.brand}}" onsubmit="return confirm('Are you sure you want to remove the car {{car.brand}} with the license plate number {{car.licensePlate}}?')">
+			<input class="btn btn-sm" disabled type="submit" style="width:100%" value="Remove">
+		</form>
+	</td>
+
+{% endif %}</tr>{% endfor %}</table></main>{% endblock %}

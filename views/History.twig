@@ -1,83 +1,71 @@
 {% block history %}
 
-
-  <main region="main" class="main site-content">
-<head>
-<link rel='stylesheet' id='google-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i,900,900i&#038;subset=latin-ext' type='text/css' media='all' />
-<link href="../css/main.css" type="text/css" rel="stylesheet" />
- <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-</head>
+		<header class="text-center m-5">
+					<h2 class=" font-weight-bold">Renting Done Right.
+					</br>
+					Finally.</h2>
+			</header>
 
 
 
-  <main region="main" class="main site-content">
- 
-      <section class="statement">
-        <header>
-          <h2>Renting Done Right. </br> Finally.</h2>
-        </header>
-     
-      </section>
-    <nav region="navigation">
+<nav class="navbar navbar-expand-lg navbar-dark nav-bg " >
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <ul class="navbar-nav mx-auto font-weight-bold">
+      <li class="nav-item ">
+        <a class="nav-link" href="/customersMenu">Customers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/carsMenu">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/rentCar">Rent Car</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/returnCar">Return Car</a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link" href="/history">History</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-              <tr><td colspan="3">
-          <form action="/customersMenu" method="post">
-            <input class="btn nav-btn" type="submit" value="Customers">
-          </form> 
-          </td>
-            <td colspan="3">
-          <form action="/carsMenu" method="post">
-            <input class="btn nav-btn" type="submit" value="Cars">
-          </form>  
-          </td>
-            <td colspan="3">
-          <form action="/rentCar" method="post">
-            <input class="btn nav-btn" type="submit" value="Rent Car">
-          </form>  
-          </td>
-            <td colspan="3">
-          <form action="/returnCar" method="post">
-            <input class="btn nav-btn" type="submit" value="Return Car">
-          </form>  
-          </td>
-           <td colspan="3">
-          <form action="/history" method="post">
-            <input class="btn nav-btn" type="submit" value="History">
-          </form>  
-          </td></tr>
-
-    </nav>
-            </main>
-     <table style="width: 100%">
+<main region="main" class="container">
+     <table class=" table table-responsive-sm table-striped">
         <thead>
- <tr>
+
   <th><b>License Plate</b></td>
     <th><b>Social Security Number</b></th>
     <th><b>Rental date</b></th>
     <th><b>Return date</b></th>
     <th><b>Days</b></th>
     <th><b>Total cost</b></th>
-    </tr>
+
  </thead>
+  <tbody>
+ 
  {% set totalCost = 0 %}
  {% for booking in bookings %}
-        <tr>
+
+         <tr>
               <td><b>{{booking.licensePlate}}</b></td>
               <td><b>{{booking.customerNumber}}</b></td>
               <td><b>{{booking.start}}</b></td>
               <td><b>{{booking.end}}</b></td>
               <td><b>{{booking.days}}</b></td>
               <td><b>{{booking.cost}}</b></td>
-          <tr>
+          
         {% set totalCost = totalCost + booking.cost %}
       {% endfor %}
-      
+      <tr>
         
-
+</tbody>
 </table>
 <table style="width: 100%;"><thead><th>Total cost</th></thead>
 <tbody><tr><td><b>{{totalCost}}</b></td></tr></tbody>
-</table>
+</table></main>
         {% endblock %}

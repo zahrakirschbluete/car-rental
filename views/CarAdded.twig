@@ -1,47 +1,46 @@
 {% block carAdded %}
 
+
+      	<header class="text-center m-5">
+					<h2 class=" font-weight-bold">Renting Done Right.
+					</br>
+					Finally.</h2>
+			</header>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark nav-bg " >
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <ul class="navbar-nav mx-auto font-weight-bold">
+      <li class="nav-item">
+        <a class="nav-link" href="/customersMenu">Customers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/carsMenu">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/rentCar">Rent Car</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/returnCar">Return Car</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="/history">History</a>
+      </li>
+    </ul>
+  </div>
+</nav>
   <main region="main" class="main site-content">
-        <section class="statement">
-        <header>
-          <h2>Renting Done Right. </br> Finally.</h2>
-        </header>
-     
-      </section>
-    <nav region="navigation">
-
-              <tr><td colspan="3">
-          <form action="/customersMenu" method="post">
-            <input class="btn nav-btn" type="submit" value="Customers">
-          </form> 
-          </td>
-            <td colspan="3">
-          <form action="/carsMenu" method="post">
-            <input class="btn nav-btn" type="submit" value="Cars">
-          </form>  
-          </td>
-            <td colspan="3">
-          <form action="/rentCar" method="post">
-            <input class="btn nav-btn" type="submit" value="Rent Car">
-          </form>  
-          </td>
-            <td colspan="3">
-          <form action="/returnCar" method="post">
-            <input class="btn nav-btn" type="submit" value="Return Car">
-          </form>  
-          </td>
-           <td colspan="3">
-          <form action="/history" method="post">
-            <input class="btn nav-btn" type="submit" value="History">
-          </form>  
-          </td></tr>
-
-    </nav>
   <h2>Car Added</h2>
 
   <p>A {{colour}} {{brand}} from {{year}} with the license plate number {{licensePlate}} has been added.</p>
 
   <form method="post" action="/carsMenu">
-    <input type="submit" value="Ok">
+    <input class="btn btn-custom col mt-2" type="submit" value="Return to menu">
   </form>
   </main>
 {% endblock %}
